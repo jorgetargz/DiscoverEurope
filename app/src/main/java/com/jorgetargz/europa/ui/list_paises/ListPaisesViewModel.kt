@@ -15,14 +15,16 @@ class ListPaisesViewModel @Inject constructor(
     private val loadAllPaisesUseCase: LoadAllPaisesUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(ListPaisesState(null))
+    private val _state = MutableLiveData(ListPaisesState(null, null))
     val state: LiveData<ListPaisesState> = _state
 
     private fun loadPaises() {
         viewModelScope.launch {
             try {
+                val lista = loadAllPaisesUseCase()
                 _state.value = _state.value?.copy(
-                    lista = loadAllPaisesUseCase.invoke()
+                    lista = lista,
+                    listaFiltrada = lista
                 )
             } catch (e: Exception) {
                 Timber.e(e)
@@ -33,9 +35,8 @@ class ListPaisesViewModel @Inject constructor(
     private fun filtrarPaises(nombre: String) {
         viewModelScope.launch {
             try {
-                val lista = loadAllPaisesUseCase.invoke()
                 _state.value = _state.value?.copy(
-                    lista = lista.filter { it.nombre.contains(nombre, true) }
+                    listaFiltrada = _state.value?.lista?.filter { it.nombre.contains(nombre, true) }
                 )
             } catch (e: Exception) {
                 Timber.e(e)

@@ -4,4 +4,5 @@ import com.jorgetargz.europa.domain.modelo.Pais
 
 data class ListPaisesState(
     val lista: List<Pais>?,
+    val listaFiltrada: List<Pais>?,
 )

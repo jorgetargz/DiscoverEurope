@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.FragmentListPaisesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +19,7 @@ class ListPaisesFragment : Fragment(), MenuProvider {
 
     private lateinit var binding: FragmentListPaisesBinding
     private val viewModel: ListPaisesViewModel by viewModels()
-    private lateinit var rvPaises: RecyclerView
+    private lateinit var adapter: PaisesAdapter
 
     inner class ListPaisesActionsImpl : ListPaisesActions {
         override fun onPaisClicked(nombre: String) {
@@ -34,22 +33,35 @@ class ListPaisesFragment : Fragment(), MenuProvider {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentListPaisesBinding.inflate(layoutInflater)
-        rvPaises = binding.rvPaises
-        val adapter = PaisesAdapter(ListPaisesActionsImpl())
-        rvPaises.adapter = adapter
+
+        configBinding()
+        configAdapter()
+        addMenuProvider()
+
         viewModel.handleEvent(ListPaisesEvent.LoadPaises)
 
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            state.lista?.let { listaPaises ->
+            state.listaFiltrada?.let { listaPaises ->
                 adapter.submitList(listaPaises)
             }
         }
 
         return binding.root
+    }
+
+    private fun configBinding() {
+        binding = FragmentListPaisesBinding.inflate(layoutInflater)
+    }
+
+    private fun configAdapter() {
+        val rvPaises = binding.rvPaises
+        adapter = PaisesAdapter(ListPaisesActionsImpl())
+        rvPaises.adapter = adapter
+    }
+
+    private fun addMenuProvider() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

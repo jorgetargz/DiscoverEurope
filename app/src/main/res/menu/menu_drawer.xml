@@ -2,7 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:id="@+id/drawer_group">
+    <item
+        android:id="@+id/listPaisesFragment"
+        android:title="@string/ver_paises"
+        android:contentDescription="@string/ver_paises"
+        app:showAsAction="never" />
+
+    <group android:id="@+id/drawer_group_favoritos">
+        <item
+            android:id="@+id/drawer_favoritos"
+            android:title="@string/favoritos"
+            android:contentDescription="@string/favoritos" >
+            <menu>
+            </menu>
+        </item>
     </group>
 
 </menu>

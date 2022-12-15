@@ -13,4 +13,5 @@
     <string name="buscar">Search</string>
     <string name="ver_paises">View countries</string>
     <string name="favorito">Favorite</string>
+    <string name="favoritos">Favorites</string>
 </resources>

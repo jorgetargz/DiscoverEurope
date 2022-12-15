@@ -18,6 +18,7 @@ import com.jorgetargz.europa.databinding.ActivityMainBinding
 import com.jorgetargz.europa.domain.modelo.Pais
 import com.jorgetargz.europa.ui.common.Constantes
 import com.jorgetargz.europa.ui.utils.StringProvider
+import com.jorgetargz.europa.ui.utils.findItemByTitle
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.state.observe(this) { state ->
             state.favoritos?.let { listaPaises ->
-                binding.navView.menu.removeGroup(R.id.drawer_group)
+                binding.navView.menu.findItemByTitle(stringProvider.getString(R.string.favoritos))?.subMenu?.clear()
                 listaPaises.forEach { pais ->
                     addPaisToDrawerMenu(pais)
                 }
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configDrawerMenu() {
         val drawerMenu = binding.navView.menu
-        drawerMenu.add(Menu.NONE, Menu.NONE, 0, stringProvider.getString(R.string.ver_paises)).apply {
+        drawerMenu.findItemByTitle(stringProvider.getString(R.string.ver_paises))?.apply {
             setOnMenuItemClickListener {
                 navController.navigate(R.id.action_global_listPaisesFragment)
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -100,10 +101,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addPaisToDrawerMenu(pais: Pais) {
-        val drawerMenu = binding.navView.menu
+        val favoritesMenu =
+            binding.navView.menu.findItemByTitle(stringProvider.getString(R.string.favoritos))?.subMenu
         val id = View.generateViewId()
-        drawerMenu.add(R.id.drawer_group, id, Menu.NONE, pais.nombre).apply {
-            setOnMenuItemClickListener {
+        favoritesMenu?.add(Menu.NONE, id, Menu.NONE, pais.nombre).apply {
+            this?.setOnMenuItemClickListener {
                 navController.navigate(R.id.action_global_viewPaisFragment, Bundle().apply {
                     putString(Constantes.NOMBRE, pais.nombre)
                 })
@@ -112,5 +114,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.listPaisesFragment -> {
+//                navController.navigate(R.id.action_global_listPaisesFragment)
+//                binding.drawerLayout.closeDrawer(GravityCompat.START)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
 }

@@ -56,6 +56,13 @@ class ViewPaisViewModel @Inject constructor(
         }
     }
 
+    fun clearStateEvents() {
+        _state.value = _state.value?.copy(
+            onUnmarkedAsFavorito = false,
+            onMarkedAsFavorito = false
+        )
+    }
+
     fun handleEvent(event: ViewPaisEvent) {
         when (event) {
             is ViewPaisEvent.LoadPais -> loadPais(event.nombre)

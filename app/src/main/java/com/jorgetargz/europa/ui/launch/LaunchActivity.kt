@@ -1,4 +1,4 @@
-package com.jorgetargz.europa.ui.splash
+package com.jorgetargz.europa.ui.launch
 
 import android.content.Intent
 import android.os.*
@@ -22,8 +22,10 @@ class LaunchActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.ivLogo1.loadUrl(Constantes.SPLASH_IMAGE_1)
-        binding.ivLogo2.loadUrl(Constantes.SPLASH_IMAGE_2)
+        with(binding) {
+            ivLogo1.loadUrl(Constantes.SPLASH_IMAGE_1)
+            ivLogo2.loadUrl(Constantes.SPLASH_IMAGE_2)
+        }
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({

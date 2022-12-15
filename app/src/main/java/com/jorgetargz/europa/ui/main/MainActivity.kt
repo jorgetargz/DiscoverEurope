@@ -16,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.ActivityMainBinding
 import com.jorgetargz.europa.domain.modelo.Pais
+import com.jorgetargz.europa.ui.common.Constantes
+import com.jorgetargz.europa.ui.utils.StringProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val viewModel: MainActivityViewModel by viewModels()
+    private val stringProvider = StringProvider(this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +71,14 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(binding.topAppBar)
         setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.topAppBar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
 
     private fun configDrawerMenu() {
         val drawerMenu = binding.navView.menu
-        drawerMenu.add(Menu.NONE, Menu.NONE, 0,"Ver paises").apply {
+        drawerMenu.add(Menu.NONE, Menu.NONE, 0, stringProvider.getString(R.string.ver_paises)).apply {
             setOnMenuItemClickListener {
                 navController.navigate(R.id.action_global_listPaisesFragment)
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -98,17 +105,12 @@ class MainActivity : AppCompatActivity() {
         drawerMenu.add(R.id.drawer_group, id, Menu.NONE, pais.nombre).apply {
             setOnMenuItemClickListener {
                 navController.navigate(R.id.action_global_viewPaisFragment, Bundle().apply {
-                    putString("nombre", pais.nombre)
+                    putString(Constantes.NOMBRE, pais.nombre)
                 })
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
                 true
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        binding.drawerLayout.openDrawer(GravityCompat.START)
-        return true
     }
 
 }

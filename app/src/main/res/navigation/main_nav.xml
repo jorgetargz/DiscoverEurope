@@ -26,6 +26,9 @@
         <argument
             android:name="nombre"
             app:argType="string" />
+        <action
+            android:id="@+id/action_viewPaisFragment_to_listPaisesFragment"
+            app:destination="@id/listPaisesFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_viewPaisFragment"

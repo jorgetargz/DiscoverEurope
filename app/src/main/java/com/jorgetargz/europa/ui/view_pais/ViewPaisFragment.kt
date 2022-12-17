@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ViewPaisFragment : Fragment(), MenuProvider {
 
     private val argNombre = Constantes.NOMBRE
-    private lateinit var nombre: String;
+    private lateinit var nombre: String
     private lateinit var binding: FragmentViewPaisBinding
     private val viewModel: ViewPaisViewModel by viewModels()
 

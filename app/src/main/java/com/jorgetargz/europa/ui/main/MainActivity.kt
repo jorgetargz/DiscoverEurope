@@ -10,9 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.ActivityMainBinding
 import com.jorgetargz.europa.domain.modelo.Pais
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         configNavController()
         configNavView()
         configAppBar()
-        configDrawerMenu()
         configBackButton()
 
         viewModel.handleEvent(MainActivityEvent.LoadPaisesFavoritos)
@@ -59,33 +56,53 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.findNavController()
+        //TODO: This is just for debugging right now (remove later)
+        val listener = navController.addOnDestinationChangedListener() { _, destination, _ ->
+            when (destination.id) {
+                R.id.listPaisesFragment -> {
+                    binding.navView.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.navView.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     private fun configNavView() {
         binding.navView.setupWithNavController(navController)
+        //TODO: This is a workaround to avoid configDrawerMenu() but still don't know why binding.navView.setupWithNavController(navController) doesn't work
+        binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.listPaisesFragment -> {
+                    navController.navigate(R.id.action_global_listPaisesFragment)
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
     }
 
     private fun configAppBar() {
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.listPaisesFragment, R.id.viewPaisFragment),
+            navController.graph,
             binding.drawerLayout
         )
         setSupportActionBar(binding.topAppBar)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.topAppBar.setNavigationOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
     }
 
     private fun configDrawerMenu() {
-        val drawerMenu = binding.navView.menu
-        drawerMenu.findItemByTitle(stringProvider.getString(R.string.ver_paises))?.apply {
-            setOnMenuItemClickListener {
-                navController.navigate(R.id.action_global_listPaisesFragment)
-                binding.drawerLayout.closeDrawer(GravityCompat.START)
-                true
-            }
-        }
+//TODO: Avoid the need to use this method solved with a sketchy workaround (see configNavView())
+
+//        val drawerMenu = binding.navView.menu
+//        drawerMenu.findItemByTitle(stringProvider.getString(R.string.ver_paises))?.apply {
+//            setOnMenuItemClickListener {
+//                navController.navigate(R.id.action_global_listPaisesFragment)
+//                binding.drawerLayout.closeDrawer(GravityCompat.START)
+//                true
+//            }
+//        }
     }
 
     private fun configBackButton() {
@@ -115,16 +132,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.listPaisesFragment -> {
-//                navController.navigate(R.id.action_global_listPaisesFragment)
-//                binding.drawerLayout.closeDrawer(GravityCompat.START)
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
 }

@@ -32,7 +32,7 @@ class LaunchActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, 1000)
 
     }
 }

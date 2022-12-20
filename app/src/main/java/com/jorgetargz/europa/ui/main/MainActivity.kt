@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.findNavController()
         //TODO: This is just for debugging right now (remove later)
-        val listener = navController.addOnDestinationChangedListener() { _, destination, _ ->
+        navController.addOnDestinationChangedListener() { _, destination, _ ->
             when (destination.id) {
                 R.id.listPaisesFragment -> {
                     binding.navView.visibility = View.VISIBLE
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configNavView() {
         binding.navView.setupWithNavController(navController)
-        //TODO: This is a workaround to avoid configDrawerMenu() but still don't know why binding.navView.setupWithNavController(navController) doesn't work
+        //TODO: This is a workaround don't know why binding.navView.setupWithNavController(navController) doesn't work
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.listPaisesFragment -> {
@@ -90,19 +90,6 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(binding.topAppBar)
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    private fun configDrawerMenu() {
-//TODO: Avoid the need to use this method solved with a sketchy workaround (see configNavView())
-
-//        val drawerMenu = binding.navView.menu
-//        drawerMenu.findItemByTitle(stringProvider.getString(R.string.ver_paises))?.apply {
-//            setOnMenuItemClickListener {
-//                navController.navigate(R.id.action_global_listPaisesFragment)
-//                binding.drawerLayout.closeDrawer(GravityCompat.START)
-//                true
-//            }
-//        }
     }
 
     private fun configBackButton() {

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "9e9f78921b96b9aecd0d93c39127be06",
+    "identityHash": "42a820a89c41fd1bcd4428426262ad13",
     "entities": [
       {
         "tableName": "paises",
@@ -53,12 +53,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "ciudades",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT NOT NULL, `pais` TEXT NOT NULL, FOREIGN KEY(`pais`) REFERENCES `paises`(`nombre`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombre",
+            "columnName": "nombre",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pais",
+            "columnName": "pais",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "paises",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "pais"
+            ],
+            "referencedColumns": [
+              "nombre"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e9f78921b96b9aecd0d93c39127be06')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '42a820a89c41fd1bcd4428426262ad13')"
     ]
   }
 }

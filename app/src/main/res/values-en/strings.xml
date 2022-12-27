@@ -14,4 +14,5 @@
     <string name="ver_paises">View countries</string>
     <string name="favorito">Favorite</string>
     <string name="favoritos">Favorites</string>
+    <string name="list_ciudades">Cities</string>
 </resources>

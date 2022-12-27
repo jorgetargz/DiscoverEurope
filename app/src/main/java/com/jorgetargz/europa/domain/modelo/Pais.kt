@@ -7,5 +7,6 @@ data class Pais(
     val urlBandera: String,
     val idiomas: String,
     val favorito: Boolean,
+    val ciudades: List<Ciudad> = emptyList(),
 
 )

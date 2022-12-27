@@ -64,10 +64,10 @@ class ViewPaisFragment : Fragment(), MenuProvider {
                     tvNombreLocal.text = pais.nombreLocal
                     tvCapital.text = pais.capital
                     tvIdiomas.text = pais.idiomas
-//                    btnCiudades.setOnClickListener {
-//                        val action = ViewPaisFragmentDirections.actionViewPaisFragmentToViewCiudadesFragment(pais.nombre)
-//                        findNavController().navigate(action)
-//                    }
+                    btnCiudades.setOnClickListener {
+                        val action = ViewPaisFragmentDirections.actionViewPaisFragmentToListCiudadesFragment(pais.nombre)
+                        findNavController().navigate(action)
+                    }
                 }
             }
             if (state.onMarkedAsFavorito) {

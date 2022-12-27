@@ -1,6 +1,9 @@
 package com.jorgetargz.europa.data.room.utils
 
+import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
+import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
+import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.domain.modelo.Pais
 
 fun Pais.toPaisEntity() = PaisEntity(
@@ -19,4 +22,26 @@ fun PaisEntity.toPais() = Pais(
     urlBandera = urlBandera,
     idiomas = idiomas,
     favorito = favorito,
+)
+
+fun Ciudad.toCiudadEntity() = CiudadEntity(
+    id = id,
+    nombre = nombre,
+    pais = pais,
+)
+
+fun CiudadEntity.toCiudad() = Ciudad(
+    id = id,
+    nombre = nombre,
+    pais = pais,
+)
+
+fun PaisConCiudades.toPais() = Pais(
+    nombre = pais.nombre,
+    nombreLocal = pais.nombreLocal,
+    capital = pais.capital,
+    urlBandera = pais.urlBandera,
+    idiomas = pais.idiomas,
+    favorito = pais.favorito,
+    ciudades = ciudades.map { it.toCiudad() }
 )

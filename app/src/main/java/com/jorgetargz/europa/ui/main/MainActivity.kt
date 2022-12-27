@@ -57,13 +57,16 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.findNavController()
         //TODO: This is just for debugging right now (remove later)
-        navController.addOnDestinationChangedListener() { _, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.listPaisesFragment -> {
                     binding.navView.visibility = View.VISIBLE
                 }
-                else -> {
+                R.id.viewPaisFragment -> {
                     binding.navView.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.navView.visibility = View.GONE
                 }
             }
         }

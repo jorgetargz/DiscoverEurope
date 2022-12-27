@@ -27,8 +27,8 @@
             android:name="nombre"
             app:argType="string" />
         <action
-            android:id="@+id/action_viewPaisFragment_to_listPaisesFragment"
-            app:destination="@id/listPaisesFragment" />
+            android:id="@+id/action_viewPaisFragment_to_listCiudadesFragment"
+            app:destination="@id/listCiudadesFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_viewPaisFragment"
@@ -42,4 +42,13 @@
         app:destination="@id/listPaisesFragment"
         app:enterAnim="@anim/enter_anim"
         app:exitAnim="@anim/exit_anim" />
+    <fragment
+        android:id="@+id/listCiudadesFragment"
+        android:name="com.jorgetargz.europa.ui.list_ciudades.ListCiudadesFragment"
+        android:label="@string/list_ciudades"
+        tools:layout="@layout/fragment_list_ciudades">
+        <argument
+            android:name="nombre"
+            app:argType="string" />
+    </fragment>
 </navigation>

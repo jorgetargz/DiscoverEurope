@@ -1,35 +1,60 @@
 package com.jorgetargz.europa.ui.list_ciudades
 
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.jorgetargz.europa.R
-import com.jorgetargz.europa.databinding.FragmentListPaisesBinding
+import com.jorgetargz.europa.databinding.FragmentListCiudadesBinding
 import com.jorgetargz.europa.ui.common.Constantes
+import com.jorgetargz.europa.ui.utils.StringProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class ListCiudadesFragment : Fragment(), MenuProvider {
 
-    private lateinit var binding: FragmentListPaisesBinding
+    private lateinit var binding: FragmentListCiudadesBinding
     private val viewModel: ListCiudadesViewModel by viewModels()
     private lateinit var adapter: CiudadesAdapter
 
     private val argNombre = Constantes.NOMBRE
     private lateinit var nombre: String
 
+    private lateinit var stringProvider: StringProvider
+
     inner class ListCiudadesActionsImpl : ListCiudadesActions {
-        override fun onPaisClicked(nombre: String) {
-//            val action =
-//                ListCiudadesFragmentDirections.actionListPaisesFragmentToViewPaisFragment(nombre)
-//            findNavController().navigate(action)
+        override fun onCityClicked(nombre: String) {
+
         }
+
+        override fun onCitySwipedLeft(position: Int) {
+            val ciudad = adapter.currentList[position]
+            adapter.removeItem(position)
+            viewModel.handleEvent(ListCiudadesEvent.DeleteCiudad(ciudad))
+            Snackbar.make(
+                binding.rvCiudades,
+                stringProvider.getString(R.string.ciudad_borrada),
+                Snackbar.LENGTH_LONG
+            )
+                .setAction(stringProvider.getString(R.string.snackbar_undo)) {
+                    viewModel.handleEvent(
+                        ListCiudadesEvent.UndoDeleteCiudad(ciudad)
+                    )
+                    adapter.restoreItem(ciudad, position)
+                }
+                .show()
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +62,7 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
         arguments?.let {
             nombre = it.getString(argNombre)!!
         }
+        stringProvider = StringProvider(requireContext())
     }
 
     override fun onCreateView(
@@ -51,8 +77,8 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
         viewModel.handleEvent(ListCiudadesEvent.LoadCiudades(nombre))
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            state.listaFiltrada?.let { listaPaises ->
-                adapter.submitList(listaPaises)
+            state.listaFiltrada?.let { listaCiudades ->
+                adapter.submitList(listaCiudades.sortedBy { it.nombre })
             }
         }
 
@@ -60,13 +86,58 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
     }
 
     private fun configBinding() {
-        binding = FragmentListPaisesBinding.inflate(layoutInflater)
+        binding = FragmentListCiudadesBinding.inflate(layoutInflater)
     }
 
     private fun configAdapter() {
-        val rvPaises = binding.rvPaises
+        val rvCiudades = binding.rvCiudades
         adapter = CiudadesAdapter(ListCiudadesActionsImpl())
-        rvPaises.adapter = adapter
+        rvCiudades.adapter = adapter
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                if (direction == ItemTouchHelper.LEFT) {
+                    val position = viewHolder.bindingAdapterPosition
+                    val listCiudadesActions = ListCiudadesActionsImpl()
+                    listCiudadesActions.onCitySwipedLeft(position)
+                }
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_paper_bin)!!
+                val itemView = viewHolder.itemView
+                val iconMargin = (itemView.height - icon.intrinsicHeight) / 2
+                if (dX < 0) {
+                    icon.setBounds(
+                        itemView.right - iconMargin - icon.intrinsicWidth,
+                        itemView.top + iconMargin,
+                        itemView.right - iconMargin,
+                        itemView.bottom - iconMargin
+                    )
+                    icon.draw(c)
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+            }
+        }).attachToRecyclerView(rvCiudades)
     }
 
     private fun addMenuProvider() {

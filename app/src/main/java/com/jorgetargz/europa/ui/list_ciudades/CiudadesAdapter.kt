@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jorgetargz.europa.R
-import com.jorgetargz.europa.databinding.ItemPaisBinding
+import com.jorgetargz.europa.databinding.ItemCiudadBinding
 import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.ui.utils.inflate
 
@@ -27,19 +27,28 @@ class CiudadesAdapter(val listPaisesActionsImpl: ListCiudadesActions) :
         bind(item)
     }
 
+    fun removeItem(position: Int) {
+        submitList(currentList.toMutableList().apply { removeAt(position) }.sortedBy { it.nombre })
+    }
+
+    fun restoreItem(ciudad: Ciudad, position: Int) {
+        submitList(currentList.toMutableList().apply { add(position, ciudad) }.sortedBy { it.nombre })
+    }
+
     class ItemViewholder(
-        val listPaisesActionsImpl: ListCiudadesActions,
+        val listCiudadesActions: ListCiudadesActions,
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
 
-        private val binding = ItemPaisBinding.bind(itemView)
+        private val binding = ItemCiudadBinding.bind(itemView)
 
         fun bind(item: Ciudad) = with(binding) {
-            tvNombre.text = item.nombre
+            tvCiudad.text = item.nombre
 
             card.setOnClickListener {
-                listPaisesActionsImpl.onPaisClicked(item.nombre)
+                listCiudadesActions.onCityClicked(item.nombre)
             }
+
         }
     }
 

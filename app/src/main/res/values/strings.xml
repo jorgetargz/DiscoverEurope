@@ -15,4 +15,6 @@
     <string name="favorito">Favorito</string>
     <string name="favoritos">Favoritos</string>
     <string name="list_ciudades">Ciudades</string>
+    <string name="ciudad_borrada">Ciudad eliminada</string>
+    <string name="snackbar_undo">Deshacer</string>
 </resources>

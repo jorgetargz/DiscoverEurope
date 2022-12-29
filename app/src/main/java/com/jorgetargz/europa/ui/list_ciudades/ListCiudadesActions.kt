@@ -2,5 +2,6 @@ package com.jorgetargz.europa.ui.list_ciudades
 
 interface ListCiudadesActions {
 
-    fun onPaisClicked(nombre: String)
+    fun onCityClicked(nombre: String)
+    fun onCitySwipedLeft(position: Int)
 }

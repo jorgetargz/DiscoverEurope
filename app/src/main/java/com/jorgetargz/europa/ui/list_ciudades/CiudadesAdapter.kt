@@ -62,7 +62,8 @@ class CiudadesAdapter(val listCiudadesActions: ListCiudadesActions) :
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             if (direction == ItemTouchHelper.LEFT) {
                 val position = viewHolder.bindingAdapterPosition
-                listCiudadesActions.onCitySwipedLeft(position)
+                val ciudad = getItem(position)
+                listCiudadesActions.onCitySwipedLeft(ciudad)
             }
         }
 

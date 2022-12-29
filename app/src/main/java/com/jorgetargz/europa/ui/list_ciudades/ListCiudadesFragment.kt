@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.FragmentListCiudadesBinding
+import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.ui.common.Constantes
 import com.jorgetargz.europa.ui.utils.StringProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,8 +35,7 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
 
         }
 
-        override fun onCitySwipedLeft(position: Int) {
-            val ciudad = adapter.currentList[position]
+        override fun onCitySwipedLeft(ciudad: Ciudad) {
             viewModel.handleEvent(ListCiudadesEvent.DeleteCiudad(ciudad))
         }
 

@@ -1,17 +1,14 @@
 package com.jorgetargz.europa.ui.list_ciudades
 
-import android.graphics.Canvas
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.FragmentListCiudadesBinding
@@ -71,7 +68,7 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
     ): View {
 
         configBinding()
-        configAdapter()
+        configRecyclerView()
         addMenuProvider()
 
         viewModel.handleEvent(ListCiudadesEvent.LoadCiudades(nombre))
@@ -89,55 +86,12 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
         binding = FragmentListCiudadesBinding.inflate(layoutInflater)
     }
 
-    private fun configAdapter() {
+    private fun configRecyclerView() {
         val rvCiudades = binding.rvCiudades
         adapter = CiudadesAdapter(ListCiudadesActionsImpl())
         rvCiudades.adapter = adapter
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                if (direction == ItemTouchHelper.LEFT) {
-                    val position = viewHolder.bindingAdapterPosition
-                    val listCiudadesActions = ListCiudadesActionsImpl()
-                    listCiudadesActions.onCitySwipedLeft(position)
-                }
-            }
-
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-                val icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_paper_bin)!!
-                val itemView = viewHolder.itemView
-                val iconMargin = (itemView.height - icon.intrinsicHeight) / 2
-                if (dX < 0) {
-                    icon.setBounds(
-                        itemView.right - iconMargin - icon.intrinsicWidth,
-                        itemView.top + iconMargin,
-                        itemView.right - iconMargin,
-                        itemView.bottom - iconMargin
-                    )
-                    icon.draw(c)
-                }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-
-            }
-        }).attachToRecyclerView(rvCiudades)
+        val touchHelper = ItemTouchHelper(adapter.touchHelper)
+        touchHelper.attachToRecyclerView(rvCiudades)
     }
 
     private fun addMenuProvider() {

@@ -30,15 +30,6 @@ class CiudadesAdapter(val listCiudadesActions: ListCiudadesActions) :
         bind(item)
     }
 
-    fun removeItem(position: Int) {
-        submitList(currentList.toMutableList().apply { removeAt(position) }.sortedBy { it.nombre })
-    }
-
-    fun restoreItem(ciudad: Ciudad, position: Int) {
-        submitList(currentList.toMutableList().apply { add(position, ciudad) }
-            .sortedBy { it.nombre })
-    }
-
     class ItemViewholder(
         val listCiudadesActions: ListCiudadesActions,
         itemView: View,

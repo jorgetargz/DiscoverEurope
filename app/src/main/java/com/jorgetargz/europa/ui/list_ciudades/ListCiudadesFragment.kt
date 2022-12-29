@@ -36,20 +36,7 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
 
         override fun onCitySwipedLeft(position: Int) {
             val ciudad = adapter.currentList[position]
-            adapter.removeItem(position)
             viewModel.handleEvent(ListCiudadesEvent.DeleteCiudad(ciudad))
-            Snackbar.make(
-                binding.rvCiudades,
-                stringProvider.getString(R.string.ciudad_borrada),
-                Snackbar.LENGTH_LONG
-            )
-                .setAction(stringProvider.getString(R.string.snackbar_undo)) {
-                    viewModel.handleEvent(
-                        ListCiudadesEvent.UndoDeleteCiudad(ciudad)
-                    )
-                    adapter.restoreItem(ciudad, position)
-                }
-                .show()
         }
 
     }
@@ -76,6 +63,20 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             state.listaFiltrada?.let { listaCiudades ->
                 adapter.submitList(listaCiudades.sortedBy { it.nombre })
+            }
+            state.ciudadEliminada?.let { ciudad ->
+                Snackbar.make(
+                    binding.rvCiudades,
+                    stringProvider.getString(R.string.ciudad_borrada),
+                    Snackbar.LENGTH_LONG
+                )
+                    .setAction(stringProvider.getString(R.string.snackbar_undo)) {
+                        viewModel.handleEvent(
+                            ListCiudadesEvent.UndoDeleteCiudad(ciudad)
+                        )
+                    }
+                    .show()
+                viewModel.handleEvent(ListCiudadesEvent.ClearState)
             }
         }
 

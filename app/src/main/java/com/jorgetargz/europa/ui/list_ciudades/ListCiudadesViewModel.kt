@@ -20,7 +20,7 @@ class ListCiudadesViewModel @Inject constructor(
     private val addCiudadUseCase: AddCiudadUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(ListCiudadesState(null, null))
+    private val _state = MutableLiveData(ListCiudadesState(null, null, null))
     val state: LiveData<ListCiudadesState> = _state
 
     private fun loadCiudades(pais: String) {
@@ -55,7 +55,8 @@ class ListCiudadesViewModel @Inject constructor(
                 deleteCiudadUseCase.invoke(ciudad)
                 _state.value = _state.value?.copy(
                     lista = _state.value?.lista?.filter { it.id != ciudad.id },
-                    listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != ciudad.id }
+                    listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != ciudad.id },
+                    ciudadEliminada = ciudad
                 )
             } catch (e: Exception) {
                 Timber.e(e)
@@ -69,12 +70,18 @@ class ListCiudadesViewModel @Inject constructor(
                 addCiudadUseCase.invoke(ciudad)
                 _state.value = _state.value?.copy(
                     lista = _state.value?.lista?.plus(ciudad),
-                    listaFiltrada = _state.value?.listaFiltrada?.plus(ciudad)
+                    listaFiltrada = _state.value?.listaFiltrada?.plus(ciudad),
                 )
             } catch (e: Exception) {
                 Timber.e(e)
             }
         }
+    }
+
+    private fun clearState() {
+        _state.value = _state.value?.copy(
+            ciudadEliminada = null,
+        )
     }
 
     fun handleEvent(event: ListCiudadesEvent) {
@@ -83,6 +90,7 @@ class ListCiudadesViewModel @Inject constructor(
             is ListCiudadesEvent.FiltrarCiudades -> filtrarCiudades(event.nombre)
             is ListCiudadesEvent.DeleteCiudad -> deleteCiudad(event.ciudad)
             is ListCiudadesEvent.UndoDeleteCiudad -> addCiudad(event.ciudad)
+            ListCiudadesEvent.ClearState -> clearState()
         }
     }
 }

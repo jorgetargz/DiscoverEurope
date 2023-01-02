@@ -22,4 +22,6 @@
     <string name="ciudad_added">Ciudad añadida</string>
     <string name="nombre_ciudad_vacio">Nombre vacio</string>
     <string name="add_city">Añadir ciudad</string>
+    <string name="add_business">Añadir empresa</string>
+    <string name="selecciona_empresa">Selecciona una empresa</string>
 </resources>

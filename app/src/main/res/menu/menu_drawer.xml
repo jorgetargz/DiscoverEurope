@@ -9,6 +9,13 @@
         android:contentDescription="@string/ver_paises"
         app:showAsAction="never" />
 
+    <item
+        android:id="@id/listBusinessFragment"
+        android:menuCategory="secondary"
+        android:title="@string/selecciona_empresa"
+        android:contentDescription="@string/ver_paises"
+        app:showAsAction="never" />
+
     <group android:id="@+id/drawer_group_favoritos"
         android:menuCategory="container">
         <item

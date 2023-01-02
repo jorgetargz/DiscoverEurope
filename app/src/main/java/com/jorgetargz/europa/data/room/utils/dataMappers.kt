@@ -1,8 +1,10 @@
 package com.jorgetargz.europa.data.room.utils
 
+import com.jorgetargz.europa.data.room.modelo.BusinessEntity
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
+import com.jorgetargz.europa.domain.modelo.Business
 import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.domain.modelo.Pais
 
@@ -44,4 +46,20 @@ fun PaisConCiudades.toPais() = Pais(
     idiomas = pais.idiomas,
     favorito = pais.favorito,
     ciudades = ciudades.map { it.toCiudad() }
+)
+
+fun Business.toBusinessEntity() = BusinessEntity(
+    id = id,
+    name = name,
+    phone = phone,
+    email = email,
+    website = website,
+)
+
+fun BusinessEntity.toBusiness() = Business(
+    id = id,
+    name = name,
+    phone = phone,
+    email = email,
+    website = website,
 )

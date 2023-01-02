@@ -24,4 +24,9 @@
     <string name="add_city">Añadir ciudad</string>
     <string name="add_business">Añadir empresa</string>
     <string name="selecciona_empresa">Selecciona una empresa</string>
+    <string name="telefono">Telefono</string>
+    <string name="email">Email</string>
+    <string name="web">Pagina web</string>
+    <string name="empresa_borrada">Empresa eliminada</string>
+    <string name="empresa_added">Empresa añadida</string>
 </resources>

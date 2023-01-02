@@ -2,6 +2,7 @@ package com.jorgetargz.europa.ui.utils
 
 import android.view.*
 import android.widget.ImageView
+import androidx.core.view.forEach
 import coil.load
 import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
@@ -11,11 +12,10 @@ fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
 
-fun Menu.findItemByTitle(nombre: String): MenuItem? {
-    for (i in 0 until size()) {
-        val item = getItem(i)
-        if (item.title == nombre) {
-            return item
+fun Menu.findItemByTitle(title: String): MenuItem? {
+    forEach { menuItem ->
+        if (menuItem.title == title) {
+            return menuItem
         }
     }
     return null

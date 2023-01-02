@@ -1,10 +1,10 @@
 package com.jorgetargz.europa.data.room.utils
 
-import com.jorgetargz.europa.data.room.modelo.BusinessEntity
+import com.jorgetargz.europa.data.room.modelo.EmpresaEntity
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
-import com.jorgetargz.europa.domain.modelo.Business
+import com.jorgetargz.europa.domain.modelo.Empresa
 import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.domain.modelo.Pais
 
@@ -48,7 +48,7 @@ fun PaisConCiudades.toPais() = Pais(
     ciudades = ciudades.map { it.toCiudad() }
 )
 
-fun Business.toBusinessEntity() = BusinessEntity(
+fun Empresa.toEmpresaEntity() = EmpresaEntity(
     id = id,
     name = name,
     phone = phone,
@@ -56,7 +56,7 @@ fun Business.toBusinessEntity() = BusinessEntity(
     website = website,
 )
 
-fun BusinessEntity.toBusiness() = Business(
+fun EmpresaEntity.toEmpresa() = Empresa(
     id = id,
     name = name,
     phone = phone,

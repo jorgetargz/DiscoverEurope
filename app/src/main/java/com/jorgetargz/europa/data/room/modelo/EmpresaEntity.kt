@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "businesses")
-data class BusinessEntity(
+data class EmpresaEntity(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int,

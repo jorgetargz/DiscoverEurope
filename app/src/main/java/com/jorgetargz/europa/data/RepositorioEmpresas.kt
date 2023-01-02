@@ -1,16 +1,16 @@
 package com.jorgetargz.europa.data
 
-import com.jorgetargz.europa.data.room.BusinessDao
-import com.jorgetargz.europa.data.room.utils.toBusiness
-import com.jorgetargz.europa.data.room.utils.toBusinessEntity
-import com.jorgetargz.europa.domain.modelo.Business
+import com.jorgetargz.europa.data.room.EmpresasDao
+import com.jorgetargz.europa.data.room.utils.toEmpresa
+import com.jorgetargz.europa.data.room.utils.toEmpresaEntity
+import com.jorgetargz.europa.domain.modelo.Empresa
 import javax.inject.Inject
 
 class RepositorioEmpresas @Inject constructor(
-    private val businessDao: BusinessDao
+    private val empresasDao: EmpresasDao
 ) {
-    suspend fun getBusiness() = businessDao.getAll().map { it.toBusiness() }
-    suspend fun getBusinessById(id: Int) = businessDao.getById(id).toBusiness()
-    suspend fun insert(business: Business) = businessDao.insert(business.toBusinessEntity())
-    suspend fun delete(business: Business) = businessDao.delete(business.toBusinessEntity())
+    suspend fun getBusiness() = empresasDao.getAll().map { it.toEmpresa() }
+    suspend fun getBusinessById(id: Int) = empresasDao.getById(id).toEmpresa()
+    suspend fun insert(empresa: Empresa) = empresasDao.insert(empresa.toEmpresaEntity())
+    suspend fun delete(empresa: Empresa) = empresasDao.delete(empresa.toEmpresaEntity())
 }

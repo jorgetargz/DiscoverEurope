@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.ItemBusinessBinding
-import com.jorgetargz.europa.domain.modelo.Business
+import com.jorgetargz.europa.domain.modelo.Empresa
 import com.jorgetargz.europa.ui.utils.inflate
 
-class BusinessAdapter(val listBusinessActions: ListBusinessActions) :
-    ListAdapter<Business, BusinessAdapter.ItemViewholder>(
+class EmpresasAdapter(val listEmpresasActions: ListEmpresasActions) :
+    ListAdapter<Empresa, EmpresasAdapter.ItemViewholder>(
         DiffCallback()
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewholder {
         return ItemViewholder(
-            listBusinessActions,
+            listEmpresasActions,
             parent.inflate(R.layout.item_business),
         )
     }
@@ -31,17 +31,17 @@ class BusinessAdapter(val listBusinessActions: ListBusinessActions) :
     }
 
     class ItemViewholder(
-        val listBusinessActions: ListBusinessActions,
+        val listEmpresasActions: ListEmpresasActions,
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemBusinessBinding.bind(itemView)
 
-        fun bind(item: Business) = with(binding) {
+        fun bind(item: Empresa) = with(binding) {
             tvEmpresa.text = item.name
 
             card.setOnClickListener {
-                listBusinessActions.onBusinessClicked(item.name)
+                listEmpresasActions.onEmpresaClicked(item.name)
             }
 
         }
@@ -63,7 +63,7 @@ class BusinessAdapter(val listBusinessActions: ListBusinessActions) :
             if (direction == ItemTouchHelper.LEFT) {
                 val position = viewHolder.bindingAdapterPosition
                 val business = getItem(position)
-                listBusinessActions.onBusinessSwipedLeft(business)
+                listEmpresasActions.onEmpresaSwipedLeft(business)
             }
         }
 
@@ -93,12 +93,12 @@ class BusinessAdapter(val listBusinessActions: ListBusinessActions) :
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Business>() {
-        override fun areItemsTheSame(oldItem: Business, newItem: Business): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<Empresa>() {
+        override fun areItemsTheSame(oldItem: Empresa, newItem: Empresa): Boolean {
             return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: Business, newItem: Business): Boolean {
+        override fun areContentsTheSame(oldItem: Empresa, newItem: Empresa): Boolean {
             return oldItem == newItem
         }
     }

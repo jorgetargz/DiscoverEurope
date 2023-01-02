@@ -72,13 +72,13 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/listBusinessFragment"
-        android:name="com.jorgetargz.europa.ui.list_business.ListBusinessFragment"
+        android:id="@+id/listEmpresasFragment"
+        android:name="com.jorgetargz.europa.ui.list_business.ListEmpresasFragment"
         android:label="@string/selecciona_empresa"
         tools:layout="@layout/fragment_list_business" />
     <action
         android:id="@+id/action_global_bussinessListFragment"
-        app:destination="@id/listBusinessFragment"
+        app:destination="@id/listEmpresasFragment"
         app:enterAnim="@anim/enter_anim"
         app:exitAnim="@anim/exit_anim"
         app:popEnterAnim="@anim/enter_anim"

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jorgetargz.europa.domain.modelo.Business
+import com.jorgetargz.europa.domain.modelo.Empresa
 import com.jorgetargz.europa.domain.usecases.empresas.AddEmpresaUseCase
 import com.jorgetargz.europa.domain.usecases.empresas.DeleteEmpresaUseCase
 import com.jorgetargz.europa.domain.usecases.empresas.LoadAllEmpresasUseCase
@@ -14,14 +14,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ListBusinessViewModel @Inject constructor(
+class ListEmpresasViewModel @Inject constructor(
     private val loadAllEmpresasUseCase: LoadAllEmpresasUseCase,
     private val addEmpresaUseCase: AddEmpresaUseCase,
     private val deleteEmpresaUseCase: DeleteEmpresaUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(ListBusinessState(null, null, null))
-    val state: LiveData<ListBusinessState> = _state
+    private val _state = MutableLiveData(ListEmpresasState(null, null, null))
+    val state: LiveData<ListEmpresasState> = _state
 
     private fun loadEmpresas() {
         viewModelScope.launch {
@@ -49,7 +49,7 @@ class ListBusinessViewModel @Inject constructor(
         }
     }
 
-    private fun deleteBusiness(empresa: Business) {
+    private fun deleteBusiness(empresa: Empresa) {
         viewModelScope.launch {
             try {
                 deleteEmpresaUseCase.invoke(empresa)
@@ -64,7 +64,7 @@ class ListBusinessViewModel @Inject constructor(
         }
     }
 
-    private fun addBusiness(empresa: Business) {
+    private fun addBusiness(empresa: Empresa) {
         viewModelScope.launch {
             try {
                 val id = addEmpresaUseCase.invoke(empresa)
@@ -85,13 +85,13 @@ class ListBusinessViewModel @Inject constructor(
         )
     }
 
-    fun handleEvent(event: ListBusinessEvent) {
+    fun handleEvent(event: ListEmpresasEvent) {
         when (event) {
-            is ListBusinessEvent.LoadBusiness -> loadEmpresas()
-            is ListBusinessEvent.FiltrarBusiness -> filtrarEmpresas(event.nombre)
-            is ListBusinessEvent.DeleteCiudad -> deleteBusiness(event.business)
-            is ListBusinessEvent.UndoDeleteCiudad -> addBusiness(event.business)
-            ListBusinessEvent.ClearState -> clearState()
+            is ListEmpresasEvent.LoadEmpresas -> loadEmpresas()
+            is ListEmpresasEvent.FiltrarEmpresas -> filtrarEmpresas(event.nombre)
+            is ListEmpresasEvent.DeleteEmpresa -> deleteBusiness(event.empresa)
+            is ListEmpresasEvent.UndoDeleteEmpresa -> addBusiness(event.empresa)
+            ListEmpresasEvent.ClearState -> clearState()
         }
     }
 }

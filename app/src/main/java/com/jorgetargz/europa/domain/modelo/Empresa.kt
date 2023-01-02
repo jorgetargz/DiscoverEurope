@@ -1,6 +1,6 @@
 package com.jorgetargz.europa.domain.modelo
 
-data class Business(
+data class Empresa(
     var id: Int,
     val name: String,
     val phone: String,

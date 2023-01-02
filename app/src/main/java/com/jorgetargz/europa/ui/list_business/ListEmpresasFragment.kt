@@ -11,22 +11,22 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.FragmentListBusinessBinding
-import com.jorgetargz.europa.domain.modelo.Business
+import com.jorgetargz.europa.domain.modelo.Empresa
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListBusinessFragment : Fragment(), MenuProvider {
+class ListEmpresasFragment : Fragment(), MenuProvider {
 
     private lateinit var binding: FragmentListBusinessBinding
-    private val viewModel: ListBusinessViewModel by viewModels()
-    private lateinit var adapter: BusinessAdapter
+    private val viewModel: ListEmpresasViewModel by viewModels()
+    private lateinit var adapter: EmpresasAdapter
 
-    inner class ListBusinessActionsImpl : ListBusinessActions {
-        override fun onBusinessClicked(nombre: String) {
+    inner class ListEmpresasActionsImpl : ListEmpresasActions {
+        override fun onEmpresaClicked(nombre: String) {
             TODO("Not yet implemented")
         }
 
-        override fun onBusinessSwipedLeft(empresa: Business) {
+        override fun onEmpresaSwipedLeft(empresa: Empresa) {
             TODO("Not yet implemented")
         }
     }
@@ -40,7 +40,7 @@ class ListBusinessFragment : Fragment(), MenuProvider {
         configAdapter()
         addMenuProvider()
 
-        viewModel.handleEvent(ListBusinessEvent.LoadBusiness)
+        viewModel.handleEvent(ListEmpresasEvent.LoadEmpresas)
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             state.listaFiltrada?.let { listaEmpresas ->
@@ -57,7 +57,7 @@ class ListBusinessFragment : Fragment(), MenuProvider {
 
     private fun configAdapter() {
         val rvEmpresas = binding.rvEmpresas
-        adapter = BusinessAdapter(ListBusinessActionsImpl())
+        adapter = EmpresasAdapter(ListEmpresasActionsImpl())
         rvEmpresas.adapter = adapter
         val touchHelper = ItemTouchHelper(adapter.touchHelper)
         touchHelper.attachToRecyclerView(rvEmpresas)
@@ -78,7 +78,7 @@ class ListBusinessFragment : Fragment(), MenuProvider {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    viewModel.handleEvent(ListBusinessEvent.FiltrarBusiness(newText))
+                    viewModel.handleEvent(ListEmpresasEvent.FiltrarEmpresas(newText))
                 }
                 return false
             }

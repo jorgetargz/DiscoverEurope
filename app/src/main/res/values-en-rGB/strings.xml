@@ -29,4 +29,5 @@
     <string name="web">Webpage</string>
     <string name="empresa_borrada">Business deleted</string>
     <string name="empresa_added">Business added</string>
+    <string name="guardar_empresa">Save business</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.jorgetargz.europa.ui.list_business
+package com.jorgetargz.europa.ui.list_empresas
 
 import android.graphics.Canvas
 import android.view.View

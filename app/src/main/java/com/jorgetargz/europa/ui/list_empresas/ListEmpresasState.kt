@@ -1,4 +1,4 @@
-package com.jorgetargz.europa.ui.list_business
+package com.jorgetargz.europa.ui.list_empresas
 
 import com.jorgetargz.europa.domain.modelo.Empresa
 

@@ -15,4 +15,11 @@
     <string name="favorito">Favorite</string>
     <string name="favoritos">Favorites</string>
     <string name="list_ciudades">Cities</string>
+    <string name="ciudad_borrada">Deleted city</string>
+    <string name="snackbar_undo">Undo</string>
+    <string name="ciudad">City</string>
+    <string name="guardar_ciudad">Save city</string>
+    <string name="ciudad_added">City added</string>
+    <string name="nombre_ciudad_vacio">Empty name</string>
+    <string name="add_city">Add city</string>
 </resources>

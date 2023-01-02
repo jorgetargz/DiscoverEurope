@@ -1,7 +1,7 @@
 package com.jorgetargz.europa.domain.modelo
 
 data class Ciudad(
-    val id: Int,
+    var id: Int = 0,
     val nombre: String,
     val pais: String,
 )

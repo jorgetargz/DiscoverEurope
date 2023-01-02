@@ -8,6 +8,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.jorgetargz.europa.R
@@ -57,6 +58,11 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
         configBinding()
         configRecyclerView()
         addMenuProvider()
+
+        binding.fabAdd.setOnClickListener {
+            val action = ListCiudadesFragmentDirections.actionListCiudadesFragmentToAddCityFragment(nombre)
+            findNavController().navigate(action)
+        }
 
         viewModel.handleEvent(ListCiudadesEvent.LoadCiudades(nombre))
 

@@ -17,4 +17,9 @@
     <string name="list_ciudades">Ciudades</string>
     <string name="ciudad_borrada">Ciudad eliminada</string>
     <string name="snackbar_undo">Deshacer</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="guardar_ciudad">Guardar ciudad</string>
+    <string name="ciudad_added">Ciudad añadida</string>
+    <string name="nombre_ciudad_vacio">Nombre vacio</string>
+    <string name="add_city">Añadir ciudad</string>
 </resources>

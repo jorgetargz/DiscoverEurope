@@ -56,34 +56,20 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.findNavController()
-        //TODO: This is just for debugging right now (remove later)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.listPaisesFragment -> {
-                    binding.navView.visibility = View.VISIBLE
-                }
-                R.id.viewPaisFragment -> {
-                    binding.navView.visibility = View.VISIBLE
-                }
-                else -> {
-                    binding.navView.visibility = View.GONE
-                }
-            }
-        }
     }
 
     private fun configNavView() {
         binding.navView.setupWithNavController(navController)
         //TODO: This is a workaround don't know why binding.navView.setupWithNavController(navController) doesn't work
-        binding.navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.listPaisesFragment -> {
-                    navController.navigate(R.id.action_global_listPaisesFragment)
-                }
-            }
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
+//        binding.navView.setNavigationItemSelectedListener {
+//            when (it.itemId) {
+//                R.id.listPaisesFragment -> {
+//                    navController.navigate(R.id.action_global_listPaisesFragment)
+//                }
+//            }
+//            binding.drawerLayout.closeDrawer(GravityCompat.START)
+//            true
+//        }
     }
 
     private fun configAppBar() {

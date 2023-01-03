@@ -72,7 +72,7 @@ fun RutaConCiudadesYEmpresa.toRuta() = Ruta(
     ciudadFin = ciudadFin.toCiudad(),
     empresa = empresa.toEmpresa(),
     precio = ruta.precio,
-    duracion = ruta.duracion,
+    duracionMin = ruta.duracion,
     comentario = ruta.comentario,
 )
 

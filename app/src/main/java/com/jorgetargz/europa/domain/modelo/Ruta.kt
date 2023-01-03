@@ -6,6 +6,6 @@ data class Ruta(
     val ciudadFin: Ciudad,
     val empresa: Empresa,
     val precio: Double,
-    val duracion: Int,
+    val duracionMin: Int,
     val comentario: String,
 )

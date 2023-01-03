@@ -7,10 +7,9 @@ import javax.inject.Inject
 class ChangePaisFavoritoStateUseCase @Inject constructor(
     private val repository: RepositorioPaises
 ) {
-    suspend operator fun invoke(pais: Pais): Pais {
+    suspend operator fun invoke(pais: Pais) {
         val updatedPais = pais.copy(favorito = !pais.favorito)
         repository.update(updatedPais)
-        return updatedPais
     }
 
 }

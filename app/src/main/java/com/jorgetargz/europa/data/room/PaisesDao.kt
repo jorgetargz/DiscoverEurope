@@ -1,9 +1,6 @@
 package com.jorgetargz.europa.data.room
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
-import androidx.room.Update
+import androidx.room.*
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
 
@@ -23,7 +20,7 @@ interface PaisesDao {
     @Query("select * from paises where nombre = :nombre limit 1")
     suspend fun getByNameWithCities(nombre: String): PaisConCiudades
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(pais: PaisEntity)
 
 }

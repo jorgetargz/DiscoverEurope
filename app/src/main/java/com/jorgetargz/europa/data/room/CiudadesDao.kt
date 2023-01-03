@@ -14,6 +14,7 @@ interface CiudadesDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(ciudad: CiudadEntity)
+
     @Delete
     suspend fun delete(ciudad: CiudadEntity)
 

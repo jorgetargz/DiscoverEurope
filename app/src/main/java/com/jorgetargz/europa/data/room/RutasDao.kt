@@ -1,10 +1,6 @@
 package com.jorgetargz.europa.data.room
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.jorgetargz.europa.data.room.modelo.RutaEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.RutaConCiudadesYEmpresa
 
@@ -17,10 +13,10 @@ interface RutasDao {
     @Query("SELECT * FROM rutas WHERE id = :id")
     fun findById(id: Int): RutaConCiudadesYEmpresa
 
-    @Insert
-    fun insert(ruta: RutaEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(ruta: RutaEntity) : Long
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(ruta: RutaEntity)
 
     @Delete

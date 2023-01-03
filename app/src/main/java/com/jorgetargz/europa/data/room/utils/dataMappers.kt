@@ -3,6 +3,7 @@ package com.jorgetargz.europa.data.room.utils
 import com.jorgetargz.europa.data.room.modelo.EmpresaEntity
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
+import com.jorgetargz.europa.data.room.modelo.RutaEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
 import com.jorgetargz.europa.data.room.modelo.relacciones.RutaConCiudadesYEmpresa
 import com.jorgetargz.europa.domain.modelo.Empresa
@@ -74,5 +75,15 @@ fun RutaConCiudadesYEmpresa.toRuta() = Ruta(
     precio = ruta.precio,
     duracionMin = ruta.duracion,
     comentario = ruta.comentario,
+)
+
+fun Ruta.toRutaEntity() = RutaEntity(
+    id = id,
+    idCiudadInicio = ciudadInicio.id,
+    idCiudadFin = ciudadFin.id,
+    idEmpresa = empresa.id,
+    precio = precio,
+    duracion = duracionMin,
+    comentario = comentario,
 )
 

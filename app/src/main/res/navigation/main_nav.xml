@@ -9,7 +9,7 @@
         android:id="@+id/listPaisesFragment"
         android:name="com.jorgetargz.europa.ui.list_paises.ListPaisesFragment"
         android:label="@string/selecciona_pais"
-        tools:layout="@layout/fragment_list_paises" >
+        tools:layout="@layout/fragment_list_paises">
         <action
             android:id="@+id/action_listPaisesFragment_to_viewPaisFragment"
             app:destination="@id/viewPaisFragment"
@@ -75,7 +75,7 @@
         android:id="@+id/listEmpresasFragment"
         android:name="com.jorgetargz.europa.ui.list_empresas.ListEmpresasFragment"
         android:label="@string/selecciona_empresa"
-        tools:layout="@layout/fragment_list_business" >
+        tools:layout="@layout/fragment_list_business">
         <action
             android:id="@+id/action_listEmpresasFragment_to_addEmpresaFragment"
             app:destination="@id/addEmpresaFragment" />
@@ -92,4 +92,16 @@
         android:name="com.jorgetargz.europa.ui.add_empresa.AddEmpresaFragment"
         android:label="fragment_add_empresa2"
         tools:layout="@layout/fragment_add_empresa" />
+    <fragment
+        android:id="@+id/listRutasFragment"
+        android:name="com.jorgetargz.europa.ui.list_rutas.ListRutasFragment"
+        android:label="@string/selecciona_ruta"
+        tools:layout="@layout/fragment_list_rutas" />
+    <action
+        android:id="@+id/action_global_listRutasFragment"
+        app:destination="@id/listRutasFragment"
+        app:enterAnim="@anim/enter_anim"
+        app:exitAnim="@anim/exit_anim"
+        app:popEnterAnim="@anim/enter_anim"
+        app:popExitAnim="@anim/exit_anim" />
 </navigation>

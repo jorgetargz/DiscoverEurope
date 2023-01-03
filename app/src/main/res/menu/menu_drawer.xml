@@ -13,7 +13,14 @@
         android:id="@id/listEmpresasFragment"
         android:menuCategory="secondary"
         android:title="@string/selecciona_empresa"
-        android:contentDescription="@string/ver_paises"
+        android:contentDescription="@string/ver_empresas"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@id/listRutasFragment"
+        android:menuCategory="secondary"
+        android:title="@string/selecciona_ruta"
+        android:contentDescription="@string/ver_rutas"
         app:showAsAction="never" />
 
     <group android:id="@+id/drawer_group_favoritos"

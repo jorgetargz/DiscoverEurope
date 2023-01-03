@@ -30,4 +30,9 @@
     <string name="empresa_borrada">Business deleted</string>
     <string name="empresa_added">Business added</string>
     <string name="guardar_empresa">Save business</string>
+    <string name="selecciona_ruta">Select a route</string>
+    <string name="add_ruta">Add route</string>
+    <string name="ruta_borrada">Route deleted</string>
+    <string name="ver_empresas">View business</string>
+    <string name="ver_rutas">View routes</string>
 </resources>

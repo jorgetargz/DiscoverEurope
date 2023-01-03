@@ -1,7 +1,7 @@
 package com.jorgetargz.europa.domain.modelo
 
 data class Ruta(
-    val id: Int,
+    var id: Int,
     val ciudadInicio: Ciudad,
     val ciudadFin: Ciudad,
     val empresa: Empresa,

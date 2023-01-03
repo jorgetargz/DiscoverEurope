@@ -4,9 +4,11 @@ import com.jorgetargz.europa.data.room.modelo.EmpresaEntity
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
+import com.jorgetargz.europa.data.room.modelo.relacciones.RutaConCiudadesYEmpresa
 import com.jorgetargz.europa.domain.modelo.Empresa
 import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.domain.modelo.Pais
+import com.jorgetargz.europa.domain.modelo.Ruta
 
 fun Pais.toPaisEntity() = PaisEntity(
     nombre = nombre,
@@ -63,3 +65,14 @@ fun EmpresaEntity.toEmpresa() = Empresa(
     email = email,
     website = website,
 )
+
+fun RutaConCiudadesYEmpresa.toRuta() = Ruta(
+    id = ruta.id,
+    ciudadInicio = ciudadInicio.toCiudad(),
+    ciudadFin = ciudadFin.toCiudad(),
+    empresa = empresa.toEmpresa(),
+    precio = ruta.precio,
+    duracion = ruta.duracion,
+    comentario = ruta.comentario,
+)
+

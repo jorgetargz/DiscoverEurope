@@ -6,17 +6,19 @@ import androidx.room.TypeConverters
 import com.jorgetargz.europa.data.room.modelo.EmpresaEntity
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
+import com.jorgetargz.europa.data.room.modelo.RutaEntity
 import com.jorgetargz.europa.data.room.utils.Converters
 
 @Database(
-    entities = [PaisEntity::class, CiudadEntity::class, EmpresaEntity::class],
-    version = 3, exportSchema = true
+    entities = [PaisEntity::class, CiudadEntity::class, EmpresaEntity::class, RutaEntity::class],
+    version = 4, exportSchema = true
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun paisesDao(): PaisesDao
     abstract fun ciudadesDao(): CiudadesDao
-    abstract fun businessDao(): EmpresasDao
+    abstract fun empresasDao(): EmpresasDao
+    abstract fun rutasDao(): RutasDao
 
 }

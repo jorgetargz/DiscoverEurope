@@ -2,10 +2,7 @@ package com.jorgetargz.europa.data.room.di
 
 import android.content.Context
 import androidx.room.Room
-import com.jorgetargz.europa.data.room.AppDatabase
-import com.jorgetargz.europa.data.room.EmpresasDao
-import com.jorgetargz.europa.data.room.CiudadesDao
-import com.jorgetargz.europa.data.room.PaisesDao
+import com.jorgetargz.europa.data.room.*
 import com.jorgetargz.europa.data.room.common.Constantes
 import dagger.Module
 import dagger.Provides
@@ -46,8 +43,11 @@ object RoomModule {
 
     @Provides
     fun providesBusinessDao(europaDB: AppDatabase): EmpresasDao =
-        europaDB.businessDao()
+        europaDB.empresasDao()
 
+    @Provides
+    fun providesRutasDao(europaDB: AppDatabase): RutasDao =
+        europaDB.rutasDao()
 
 }
 

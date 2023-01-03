@@ -8,18 +8,18 @@ import com.jorgetargz.europa.data.room.modelo.relacciones.RutaConCiudadesYEmpres
 interface RutasDao {
 
     @Query("SELECT * FROM rutas")
-    fun getAllWithRelations(): List<RutaConCiudadesYEmpresa>
+    suspend fun getAllWithRelations(): List<RutaConCiudadesYEmpresa>
 
     @Query("SELECT * FROM rutas WHERE id = :id")
-    fun findById(id: Int): RutaConCiudadesYEmpresa
+    suspend fun findById(id: Int): RutaConCiudadesYEmpresa
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(ruta: RutaEntity) : Long
+    suspend fun insert(ruta: RutaEntity) : Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(ruta: RutaEntity)
+    suspend fun update(ruta: RutaEntity)
 
     @Delete
-    fun delete(ruta: RutaEntity)
+    suspend fun delete(ruta: RutaEntity)
 
 }

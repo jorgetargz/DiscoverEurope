@@ -1,7 +1,6 @@
 package com.jorgetargz.europa.data.room.utils
 
 import androidx.room.TypeConverter
-import java.time.LocalDate
 
 class Converters {
 

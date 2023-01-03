@@ -42,7 +42,6 @@ class ViewPaisViewModel @Inject constructor(
                         onUnmarkedAsFavorito = true,
                         onMarkedAsFavorito = false
                     )
-
                 } else {
                     _state.value = _state.value?.copy(
                         onMarkedAsFavorito = true,

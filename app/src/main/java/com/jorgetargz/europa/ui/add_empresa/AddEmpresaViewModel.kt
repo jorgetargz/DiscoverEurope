@@ -43,10 +43,9 @@ class AddEmpresaViewModel @Inject constructor(
         if (empresa.name.isNotEmpty()) {
             viewModelScope.launch {
                 try {
-                    val id = addEmpresaUseCase.invoke(empresa)
-                    empresa.id = id.toInt()
+                    val empresaConId = addEmpresaUseCase.invoke(empresa)
                     _state.value = _state.value?.copy(
-                        empresaAdded = empresa
+                        empresaAdded = empresaConId
                     )
                 } catch (e: Exception) {
                     Timber.e(e)

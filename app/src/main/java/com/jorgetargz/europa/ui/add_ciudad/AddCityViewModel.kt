@@ -44,10 +44,9 @@ class AddCityViewModel @Inject constructor(
         if (ciudad.nombre.isNotEmpty()) {
             viewModelScope.launch {
                 try {
-                    val id = addCiudadUseCase.invoke(ciudad)
-                    ciudad.id = id.toInt()
+                    val ciudadConId = addCiudadUseCase.invoke(ciudad)
                     _state.value = _state.value?.copy(
-                        ciudadAdded = ciudad
+                        ciudadAdded = ciudadConId
                     )
                 } catch (e: Exception) {
                     Timber.e(e)

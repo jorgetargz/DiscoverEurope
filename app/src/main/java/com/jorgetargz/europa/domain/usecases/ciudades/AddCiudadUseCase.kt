@@ -7,5 +7,8 @@ import javax.inject.Inject
 class AddCiudadUseCase @Inject constructor(
     private val repository: RepositorioCiudades
 ) {
-    suspend operator fun invoke(ciudad: Ciudad) = repository.insert(ciudad)
+    suspend operator fun invoke(ciudad: Ciudad): Ciudad {
+        ciudad.id = repository.insert(ciudad).toInt()
+        return ciudad
+    }
 }

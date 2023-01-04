@@ -7,5 +7,8 @@ import javax.inject.Inject
 class AddEmpresaUseCase @Inject constructor(
     private val repository: RepositorioEmpresas
 ) {
-    suspend operator fun invoke(empresa: Empresa) = repository.insert(empresa)
+    suspend operator fun invoke(empresa: Empresa): Empresa {
+        empresa.id = repository.insert(empresa).toInt()
+        return empresa
+    }
 }

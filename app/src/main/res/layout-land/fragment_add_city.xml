@@ -35,9 +35,10 @@
                     android:id="@+id/et_ciudad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/dark_blue"
                     android:hint="@string/ciudad"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColor="@color/dark_blue"
+                    android:textColorHint="@color/dark_blue" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

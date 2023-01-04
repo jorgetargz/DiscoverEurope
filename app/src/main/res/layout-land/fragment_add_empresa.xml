@@ -47,7 +47,6 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline11"
                 app:layout_constraintEnd_toStartOf="@+id/guideline12"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ti_nombre">
@@ -87,7 +86,6 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:layout_constraintBottom_toBottomOf="@id/guideline11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline12"
                 app:layout_constraintTop_toBottomOf="@id/ti_email">
@@ -112,12 +110,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="228dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline12"

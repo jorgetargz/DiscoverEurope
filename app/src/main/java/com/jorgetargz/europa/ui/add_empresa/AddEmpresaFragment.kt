@@ -31,7 +31,7 @@ class AddEmpresaFragment : Fragment() {
 
         binding = FragmentAddEmpresaBinding.inflate(layoutInflater)
 
-        binding.btnSaveCity.setOnClickListener {
+        binding.btnSaveEmpresa.setOnClickListener {
             val nombre = binding.etNombre.text.toString()
             val telefono = binding.etTelefono.text.toString()
             val email = binding.etEmail.text.toString()

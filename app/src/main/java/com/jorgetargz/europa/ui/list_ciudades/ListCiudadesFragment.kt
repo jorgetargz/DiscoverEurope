@@ -32,10 +32,6 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
     private lateinit var stringProvider: StringProvider
 
     inner class ListCiudadesActionsImpl : ListCiudadesActions {
-        override fun onCityClicked(nombre: String) {
-
-        }
-
         override fun onCitySwipedLeft(ciudad: Ciudad) {
             viewModel.handleEvent(ListCiudadesEvent.DeleteCiudad(ciudad))
         }

@@ -20,7 +20,6 @@ class CiudadesAdapter(val listCiudadesActions: ListCiudadesActions) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewholder {
         return ItemViewholder(
-            listCiudadesActions,
             parent.inflate(R.layout.item_ciudad),
         )
     }
@@ -31,7 +30,6 @@ class CiudadesAdapter(val listCiudadesActions: ListCiudadesActions) :
     }
 
     class ItemViewholder(
-        val listCiudadesActions: ListCiudadesActions,
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
 
@@ -39,11 +37,6 @@ class CiudadesAdapter(val listCiudadesActions: ListCiudadesActions) :
 
         fun bind(item: Ciudad) = with(binding) {
             tvCiudad.text = item.nombre
-
-            card.setOnClickListener {
-                listCiudadesActions.onCityClicked(item.nombre)
-            }
-
         }
     }
 

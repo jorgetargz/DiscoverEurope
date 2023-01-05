@@ -26,7 +26,7 @@ class AddEmpresaViewModel @Inject constructor(
     private val _state = MutableLiveData(AddEmpresaState(null, null))
     val state: LiveData<AddEmpresaState> = _state
 
-    private fun deleteCiudad(empresa: Empresa) {
+    private fun deleteEmpresa(empresa: Empresa) {
         viewModelScope.launch {
             try {
                 deleteEmpresaUseCase.invoke(empresa)
@@ -39,7 +39,7 @@ class AddEmpresaViewModel @Inject constructor(
         }
     }
 
-    private fun addCiudad(empresa: Empresa) {
+    private fun addEmpresa(empresa: Empresa) {
         if (empresa.name.isNotEmpty()) {
             viewModelScope.launch {
                 try {
@@ -66,8 +66,8 @@ class AddEmpresaViewModel @Inject constructor(
 
     fun handleEvent(event: AddEmpresaEvent) {
         when (event) {
-            is AddEmpresaEvent.DeleteEmpresa -> deleteCiudad(event.empresa)
-            is AddEmpresaEvent.AddEmpresa -> addCiudad(event.empresa)
+            is AddEmpresaEvent.DeleteEmpresa -> deleteEmpresa(event.empresa)
+            is AddEmpresaEvent.AddEmpresa -> addEmpresa(event.empresa)
             is AddEmpresaEvent.ClearState -> clearState()
         }
     }

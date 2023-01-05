@@ -67,11 +67,10 @@ class ListEmpresasViewModel @Inject constructor(
     private fun addBusiness(empresa: Empresa) {
         viewModelScope.launch {
             try {
-                val id = addEmpresaUseCase.invoke(empresa)
-                empresa.id = id.toInt()
+                val empresaConId = addEmpresaUseCase.invoke(empresa)
                 _state.value = _state.value?.copy(
-                    lista = _state.value?.lista?.plus(empresa),
-                    listaFiltrada = _state.value?.listaFiltrada?.plus(empresa),
+                    lista = _state.value?.lista?.plus(empresaConId),
+                    listaFiltrada = _state.value?.listaFiltrada?.plus(empresaConId),
                 )
             } catch (e: Exception) {
                 Timber.e(e)

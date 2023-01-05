@@ -41,7 +41,7 @@ class EmpresasAdapter(val listEmpresasActions: ListEmpresasActions) :
             tvEmpresa.text = item.name
 
             card.setOnClickListener {
-                listEmpresasActions.onEmpresaClicked(item.name)
+                listEmpresasActions.onEmpresaClicked(item.id)
             }
 
         }

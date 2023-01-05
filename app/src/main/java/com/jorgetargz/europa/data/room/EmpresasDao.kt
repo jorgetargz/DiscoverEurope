@@ -15,6 +15,9 @@ interface EmpresasDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(business: EmpresaEntity) : Long
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(business: EmpresaEntity)
+
     @Delete
     suspend fun delete(business: EmpresaEntity)
 }

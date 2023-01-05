@@ -35,4 +35,7 @@
     <string name="ruta_borrada">Ruta eliminada</string>
     <string name="ver_empresas">Ver empresas</string>
     <string name="ver_rutas">Ver rutas</string>
+    <string name="editar_empresa">Editar empresa</string>
+    <string name="add_empresa">Añadir empresa</string>
+    <string name="empresa_edited">Empresa editada</string>
 </resources>

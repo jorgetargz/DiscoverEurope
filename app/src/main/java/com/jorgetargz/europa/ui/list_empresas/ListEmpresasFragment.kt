@@ -26,8 +26,9 @@ class ListEmpresasFragment : Fragment(), MenuProvider {
     private lateinit var stringProvider: StringProvider
 
     inner class ListEmpresasActionsImpl : ListEmpresasActions {
-        override fun onEmpresaClicked(nombre: String) {
-            TODO("Not yet implemented")
+        override fun onEmpresaClicked(id: Int) {
+            val action = ListEmpresasFragmentDirections.actionListEmpresasFragmentToEditEmpresaFragment(id)
+            findNavController().navigate(action)
         }
 
         override fun onEmpresaSwipedLeft(empresa: Empresa) {

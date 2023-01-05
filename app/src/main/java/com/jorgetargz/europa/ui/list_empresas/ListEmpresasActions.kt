@@ -4,6 +4,6 @@ import com.jorgetargz.europa.domain.modelo.Empresa
 
 interface ListEmpresasActions {
 
-    fun onEmpresaClicked(nombre: String)
+    fun onEmpresaClicked(id: Int)
     fun onEmpresaSwipedLeft(empresa: Empresa)
 }

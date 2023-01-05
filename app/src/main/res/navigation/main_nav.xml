@@ -77,6 +77,9 @@
         android:label="@string/selecciona_empresa"
         tools:layout="@layout/fragment_list_business">
         <action
+            android:id="@+id/action_listEmpresasFragment_to_editEmpresaFragment"
+            app:destination="@id/editEmpresaFragment" />
+        <action
             android:id="@+id/action_listEmpresasFragment_to_addEmpresaFragment"
             app:destination="@id/addEmpresaFragment" />
     </fragment>
@@ -90,7 +93,7 @@
     <fragment
         android:id="@+id/addEmpresaFragment"
         android:name="com.jorgetargz.europa.ui.add_empresa.AddEmpresaFragment"
-        android:label="fragment_add_empresa2"
+        android:label="@string/add_empresa"
         tools:layout="@layout/fragment_add_empresa" />
     <fragment
         android:id="@+id/listRutasFragment"
@@ -104,4 +107,13 @@
         app:exitAnim="@anim/exit_anim"
         app:popEnterAnim="@anim/enter_anim"
         app:popExitAnim="@anim/exit_anim" />
+    <fragment
+        android:id="@+id/editEmpresaFragment"
+        android:name="com.jorgetargz.europa.ui.edit_empresa.EditEmpresaFragment"
+        android:label="@string/editar_empresa"
+        tools:layout="@layout/fragment_edit_empresa" >
+        <argument
+            android:name="idEmpresa"
+            app:argType="integer" />
+    </fragment>
 </navigation>

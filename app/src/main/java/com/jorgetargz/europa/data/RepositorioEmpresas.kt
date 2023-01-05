@@ -12,5 +12,6 @@ class RepositorioEmpresas @Inject constructor(
     suspend fun getBusiness() = empresasDao.getAll().map { it.toEmpresa() }
     suspend fun getBusinessById(id: Int) = empresasDao.getById(id).toEmpresa()
     suspend fun insert(empresa: Empresa) = empresasDao.insert(empresa.toEmpresaEntity())
+    suspend fun update(empresa: Empresa) = empresasDao.update(empresa.toEmpresaEntity())
     suspend fun delete(empresa: Empresa) = empresasDao.delete(empresa.toEmpresaEntity())
 }

@@ -38,6 +38,7 @@
                     android:hint="@string/ciudad"
                     android:inputType="text"
                     android:textColor="@color/dark_blue"
+                    android:backgroundTint="@color/light_blue"
                     android:textColorHint="@color/dark_blue" />
 
             </com.google.android.material.textfield.TextInputLayout>

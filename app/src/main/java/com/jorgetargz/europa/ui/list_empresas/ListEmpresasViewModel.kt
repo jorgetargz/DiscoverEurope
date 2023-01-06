@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgetargz.europa.domain.modelo.Empresa
 import com.jorgetargz.europa.domain.usecases.empresas.AddEmpresaUseCase
+import com.jorgetargz.europa.domain.usecases.empresas.DeleteEmpresaConRutasUseCase
 import com.jorgetargz.europa.domain.usecases.empresas.DeleteEmpresaUseCase
 import com.jorgetargz.europa.domain.usecases.empresas.LoadAllEmpresasUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +19,10 @@ class ListEmpresasViewModel @Inject constructor(
     private val loadAllEmpresasUseCase: LoadAllEmpresasUseCase,
     private val addEmpresaUseCase: AddEmpresaUseCase,
     private val deleteEmpresaUseCase: DeleteEmpresaUseCase,
+    private val deleteEmpresaConRutasUseCase: DeleteEmpresaConRutasUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(ListEmpresasState(null, null, null))
+    private val _state = MutableLiveData(ListEmpresasState(null, null, null, null))
     val state: LiveData<ListEmpresasState> = _state
 
     private fun loadEmpresas() {
@@ -49,10 +51,28 @@ class ListEmpresasViewModel @Inject constructor(
         }
     }
 
-    private fun deleteBusiness(empresa: Empresa) {
+    private fun deleteEmpresa(empresa: Empresa) {
         viewModelScope.launch {
             try {
                 deleteEmpresaUseCase.invoke(empresa)
+                _state.value = _state.value?.copy(
+                    lista = _state.value?.lista?.filter { it.id != empresa.id },
+                    listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != empresa.id },
+                    empresaEliminada = empresa
+                )
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(
+                    onDeleteEmpresaConRutas = empresa
+                )
+                Timber.e(e)
+            }
+        }
+    }
+
+    private fun deleteEmpresaConRutas(empresa: Empresa) {
+        viewModelScope.launch {
+            try {
+                deleteEmpresaConRutasUseCase.invoke(empresa)
                 _state.value = _state.value?.copy(
                     lista = _state.value?.lista?.filter { it.id != empresa.id },
                     listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != empresa.id },
@@ -64,7 +84,7 @@ class ListEmpresasViewModel @Inject constructor(
         }
     }
 
-    private fun addBusiness(empresa: Empresa) {
+    private fun addEmpresa(empresa: Empresa) {
         viewModelScope.launch {
             try {
                 val empresaConId = addEmpresaUseCase.invoke(empresa)
@@ -81,6 +101,7 @@ class ListEmpresasViewModel @Inject constructor(
     private fun clearState() {
         _state.value = _state.value?.copy(
             empresaEliminada = null,
+            onDeleteEmpresaConRutas = null
         )
     }
 
@@ -88,8 +109,9 @@ class ListEmpresasViewModel @Inject constructor(
         when (event) {
             is ListEmpresasEvent.LoadEmpresas -> loadEmpresas()
             is ListEmpresasEvent.FiltrarEmpresas -> filtrarEmpresas(event.nombre)
-            is ListEmpresasEvent.DeleteEmpresa -> deleteBusiness(event.empresa)
-            is ListEmpresasEvent.UndoDeleteEmpresa -> addBusiness(event.empresa)
+            is ListEmpresasEvent.DeleteEmpresa -> deleteEmpresa(event.empresa)
+            is ListEmpresasEvent.DeleteEmpresaConRutas -> deleteEmpresaConRutas(event.empresa)
+            is ListEmpresasEvent.UndoDeleteEmpresa -> addEmpresa(event.empresa)
             ListEmpresasEvent.ClearState -> clearState()
         }
     }

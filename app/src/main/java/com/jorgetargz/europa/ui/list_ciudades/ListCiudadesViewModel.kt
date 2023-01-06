@@ -62,24 +62,8 @@ class ListCiudadesViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(
-                    lista = _state.value?.lista,
-                    listaFiltrada = _state.value?.listaFiltrada,
                     onDeleteCiudadConRutas = ciudad
                 )
-                Timber.e(e)
-            }
-        }
-    }
-
-    private fun addCiudad(ciudad: Ciudad) {
-        viewModelScope.launch {
-            try {
-                addCiudadUseCase.invoke(ciudad)
-                _state.value = _state.value?.copy(
-                    lista = _state.value?.lista?.plus(ciudad),
-                    listaFiltrada = _state.value?.listaFiltrada?.plus(ciudad),
-                )
-            } catch (e: Exception) {
                 Timber.e(e)
             }
         }
@@ -93,6 +77,20 @@ class ListCiudadesViewModel @Inject constructor(
                     lista = _state.value?.lista?.filter { it.id != ciudad.id },
                     listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != ciudad.id },
                     ciudadEliminada = ciudad
+                )
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }
+    }
+
+    private fun addCiudad(ciudad: Ciudad) {
+        viewModelScope.launch {
+            try {
+                addCiudadUseCase.invoke(ciudad)
+                _state.value = _state.value?.copy(
+                    lista = _state.value?.lista?.plus(ciudad),
+                    listaFiltrada = _state.value?.listaFiltrada?.plus(ciudad),
                 )
             } catch (e: Exception) {
                 Timber.e(e)

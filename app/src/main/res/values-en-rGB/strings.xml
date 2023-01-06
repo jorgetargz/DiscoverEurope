@@ -54,4 +54,6 @@
     <string name="ciudad_con_rutas">City with routes</string>
     <string name="ciudad_con_rutas_mensaje">This city have defined routes are you sure you want to delete both the city and the routes</string>
     <string name="cancelar">Cancel</string>
+    <string name="empresa_con_rutas">Business with routes</string>
+    <string name="empresa_con_rutas_mensaje">This business have routes are you sure you want to delete both the business and its routes</string>
 </resources>

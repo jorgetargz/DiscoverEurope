@@ -14,4 +14,8 @@ class RepositorioEmpresas @Inject constructor(
     suspend fun insert(empresa: Empresa) = empresasDao.insert(empresa.toEmpresaEntity())
     suspend fun update(empresa: Empresa) = empresasDao.update(empresa.toEmpresaEntity())
     suspend fun delete(empresa: Empresa) = empresasDao.delete(empresa.toEmpresaEntity())
+    suspend fun deleteEmpresaConRutas(empresa: Empresa) {
+        val empresaConRutas = empresasDao.getEmpresaConRutasById(empresa.id)
+        empresasDao.deleteEmpresaYRutas(empresaConRutas.rutas, empresaConRutas.empresa)
+    }
 }

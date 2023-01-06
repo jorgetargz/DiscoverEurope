@@ -54,4 +54,6 @@
     <string name="ciudad_con_rutas">Ciudad con rutas</string>
     <string name="ciudad_con_rutas_mensaje">Esta ciudad tiene rutas asignadas estas seguro de que quieres borrarlas</string>
     <string name="cancelar">Cancelar</string>
+    <string name="empresa_con_rutas">Empresa con rutas</string>
+    <string name="empresa_con_rutas_mensaje">Esta empresa tiene rutas definidas seguro que deseas eliminarla</string>
 </resources>

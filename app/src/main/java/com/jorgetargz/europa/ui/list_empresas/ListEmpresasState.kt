@@ -6,4 +6,5 @@ data class ListEmpresasState(
     val lista: List<Empresa>?,
     val listaFiltrada: List<Empresa>?,
     val empresaEliminada: Empresa?,
+    val onDeleteEmpresaConRutas: Empresa?,
 )

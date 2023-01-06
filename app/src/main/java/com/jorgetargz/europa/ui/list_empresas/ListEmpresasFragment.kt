@@ -1,5 +1,6 @@
 package com.jorgetargz.europa.ui.list_empresas
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -73,6 +74,22 @@ class ListEmpresasFragment : Fragment(), MenuProvider {
                             ListEmpresasEvent.UndoDeleteEmpresa(empresa)
                         )
                     }
+                    .show()
+                viewModel.handleEvent(ListEmpresasEvent.ClearState)
+            }
+            state.onDeleteEmpresaConRutas?.let {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(stringProvider.getString(R.string.empresa_con_rutas))
+                    .setMessage(stringProvider.getString(R.string.empresa_con_rutas_mensaje))
+                    .setPositiveButton(stringProvider.getString(R.string.ok)) { dialog, _ ->
+                        viewModel.handleEvent(ListEmpresasEvent.DeleteEmpresaConRutas(it))
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton(stringProvider.getString(R.string.cancelar)) { dialog, _ ->
+                        adapter.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(true)
                     .show()
                 viewModel.handleEvent(ListEmpresasEvent.ClearState)
             }

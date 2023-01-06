@@ -6,4 +6,8 @@ data class Empresa(
     val phone: String,
     val email: String,
     val website: String,
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}

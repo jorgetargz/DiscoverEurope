@@ -45,7 +45,9 @@
         android:id="@+id/action_global_listPaisesFragment"
         app:destination="@id/listPaisesFragment"
         app:enterAnim="@anim/enter_anim"
-        app:exitAnim="@anim/exit_anim" />
+        app:exitAnim="@anim/exit_anim"
+        app:popEnterAnim="@anim/enter_anim"
+        app:popExitAnim="@anim/exit_anim" />
     <fragment
         android:id="@+id/listCiudadesFragment"
         android:name="com.jorgetargz.europa.ui.list_ciudades.ListCiudadesFragment"
@@ -78,10 +80,18 @@
         tools:layout="@layout/fragment_list_business">
         <action
             android:id="@+id/action_listEmpresasFragment_to_editEmpresaFragment"
-            app:destination="@id/editEmpresaFragment" />
+            app:destination="@id/editEmpresaFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/enter_anim"
+            app:popExitAnim="@anim/exit_anim"/>
         <action
             android:id="@+id/action_listEmpresasFragment_to_addEmpresaFragment"
-            app:destination="@id/addEmpresaFragment" />
+            app:destination="@id/addEmpresaFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/enter_anim"
+            app:popExitAnim="@anim/exit_anim" />
     </fragment>
     <action
         android:id="@+id/action_global_bussinessListFragment"
@@ -99,7 +109,15 @@
         android:id="@+id/listRutasFragment"
         android:name="com.jorgetargz.europa.ui.list_rutas.ListRutasFragment"
         android:label="@string/selecciona_ruta"
-        tools:layout="@layout/fragment_list_rutas" />
+        tools:layout="@layout/fragment_list_rutas" >
+        <action
+            android:id="@+id/action_listRutasFragment_to_addRutaFragment"
+            app:destination="@id/addRutaFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/enter_anim"
+            app:popExitAnim="@anim/exit_anim" />
+    </fragment>
     <action
         android:id="@+id/action_global_listRutasFragment"
         app:destination="@id/listRutasFragment"
@@ -116,4 +134,9 @@
             android:name="idEmpresa"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/addRutaFragment"
+        android:name="com.jorgetargz.europa.ui.add_ruta.AddRutaFragment"
+        android:label="fragment_add_ruta"
+        tools:layout="@layout/fragment_add_ruta" />
 </navigation>

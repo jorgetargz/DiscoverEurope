@@ -70,11 +70,10 @@ class ListRutasViewModel @Inject constructor(
     private fun addRuta(ruta: Ruta) {
         viewModelScope.launch {
             try {
-                val id = addRutaUseCase.invoke(ruta)
-                ruta.id = id.toInt()
+                val rutaConId = addRutaUseCase.invoke(ruta)
                 _state.value = _state.value?.copy(
-                    lista = _state.value?.lista?.plus(ruta),
-                    listaFiltrada = _state.value?.listaFiltrada?.plus(ruta),
+                    lista = _state.value?.lista?.plus(rutaConId),
+                    listaFiltrada = _state.value?.listaFiltrada?.plus(rutaConId),
                 )
             } catch (e: Exception) {
                 Timber.e(e)

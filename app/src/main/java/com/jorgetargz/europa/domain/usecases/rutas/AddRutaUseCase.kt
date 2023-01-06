@@ -7,5 +7,8 @@ import javax.inject.Inject
 class AddRutaUseCase @Inject constructor(
     private val repository: RepositorioRutas
 ) {
-    suspend operator fun invoke(ruta: Ruta) = repository.insert(ruta)
+    suspend operator fun invoke(ruta: Ruta) : Ruta {
+        ruta.id = repository.insert(ruta).toInt()
+        return ruta
+    }
 }

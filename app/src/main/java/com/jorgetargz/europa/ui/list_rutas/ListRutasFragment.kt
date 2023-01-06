@@ -8,6 +8,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.jorgetargz.europa.R
@@ -49,10 +50,8 @@ class ListRutasFragment : Fragment(), MenuProvider {
         addMenuProvider()
 
         binding.fabAdd.setOnClickListener {
-            TODO("Not yet implemented")
-//            val action =
-//                ListEmpresasFragmentDirections.actionListEmpresasFragmentToAddEmpresaFragment()
-//            findNavController().navigate(action)
+            val action = ListRutasFragmentDirections.actionListRutasFragmentToAddRutaFragment()
+            findNavController().navigate(action)
         }
 
         viewModel.handleEvent(ListRutasEvent.LoadRutas)

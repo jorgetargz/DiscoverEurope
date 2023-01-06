@@ -38,4 +38,14 @@
     <string name="editar_empresa">Edit busineess</string>
     <string name="add_empresa">Add business</string>
     <string name="empresa_edited">Business edited</string>
+    <string name="ruta_added">Route added</string>
+    <string name="ciudades_iguales_error">Invalid route</string>
+    <string name="guardar_ruta">Save route</string>
+    <string name="ciudad_inicio">Start city</string>
+    <string name="ciudad_fin">End city</string>
+    <string name="empresa">Business</string>
+    <string name="precio">Prize €</string>
+    <string name="duracion">Duration (min)</string>
+    <string name="comentarios">Coments (Optional)</string>
+    <string name="error_add_ruta">Fill all the required fields</string>
 </resources>

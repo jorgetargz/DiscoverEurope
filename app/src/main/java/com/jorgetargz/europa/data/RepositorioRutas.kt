@@ -10,6 +10,7 @@ class RepositorioRutas @Inject constructor(
     private val rutasDao: RutasDao
 ) {
     suspend fun getRutas() = rutasDao.getAllWithRelations().map { it.toRuta() }
+    suspend fun getRutaById(id: Int) = rutasDao.findById(id).toRuta()
     suspend fun insert(ruta: Ruta) = rutasDao.insert(ruta.toRutaEntity())
     suspend fun update(ruta: Ruta) = rutasDao.update(ruta.toRutaEntity())
     suspend fun delete(ruta: Ruta) = rutasDao.delete(ruta.toRutaEntity())

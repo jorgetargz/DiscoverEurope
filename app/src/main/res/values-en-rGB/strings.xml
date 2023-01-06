@@ -48,4 +48,6 @@
     <string name="duracion">Duration (min)</string>
     <string name="comentarios">Coments (Optional)</string>
     <string name="error_add_ruta">Fill all the required fields</string>
+    <string name="ruta_edited">Route edited</string>
+    <string name="editar_ruta">Edit route</string>
 </resources>

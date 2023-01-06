@@ -27,7 +27,8 @@ class ListRutasFragment : Fragment(), MenuProvider {
 
     inner class ListRutasActionsImpl : ListRutasActions {
         override fun onRutaClicked(ruta: Ruta) {
-            TODO("Not yet implemented")
+            val action = ListRutasFragmentDirections.actionListRutasFragmentToEditRutaFragment(ruta.id)
+            findNavController().navigate(action)
         }
 
         override fun onRutaSwipedLeft(ruta: Ruta) {

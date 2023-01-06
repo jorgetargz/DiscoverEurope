@@ -117,6 +117,13 @@
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/enter_anim"
             app:popExitAnim="@anim/exit_anim" />
+        <action
+            android:id="@+id/action_listRutasFragment_to_editRutaFragment"
+            app:destination="@id/editRutaFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/enter_anim"
+            app:popExitAnim="@anim/exit_anim" />
     </fragment>
     <action
         android:id="@+id/action_global_listRutasFragment"
@@ -137,6 +144,15 @@
     <fragment
         android:id="@+id/addRutaFragment"
         android:name="com.jorgetargz.europa.ui.add_ruta.AddRutaFragment"
-        android:label="fragment_add_ruta"
+        android:label="@string/add_ruta"
         tools:layout="@layout/fragment_add_ruta" />
+    <fragment
+        android:id="@+id/editRutaFragment"
+        android:name="com.jorgetargz.europa.ui.edit_ruta.EditRutaFragment"
+        android:label="@string/editar_ruta"
+        tools:layout="@layout/fragment_edit_ruta" >
+        <argument
+            android:name="idRuta"
+            app:argType="integer" />
+    </fragment>
 </navigation>

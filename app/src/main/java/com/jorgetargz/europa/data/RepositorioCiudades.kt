@@ -13,4 +13,9 @@ class RepositorioCiudades @Inject constructor(
     suspend fun insert(ciudad: Ciudad) = ciudadesDao.insert(ciudad.toCiudadEntity())
     suspend fun update(ciudad: Ciudad) = ciudadesDao.update(ciudad.toCiudadEntity())
     suspend fun delete(ciudad: Ciudad) = ciudadesDao.delete(ciudad.toCiudadEntity())
+    suspend fun deleteCiudadYRutas(ciudad: Ciudad) {
+        val ciudadConRutas = ciudadesDao.getCiudadConRutas(ciudad.id)
+        val rutas = ciudadConRutas.rutasDeSalida + ciudadConRutas.rutasDeLlegada
+        ciudadesDao.deleteCiudadYRutas(rutas, ciudadConRutas.ciudad)
+    }
 }

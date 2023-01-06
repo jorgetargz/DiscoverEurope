@@ -1,7 +1,9 @@
 package com.jorgetargz.europa.ui.launch
 
 import android.content.Intent
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.jorgetargz.europa.databinding.ActivityLaunchBinding
 import com.jorgetargz.europa.ui.common.Constantes
@@ -23,8 +25,7 @@ class LaunchActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         with(binding) {
-            ivLogo1.loadUrl(Constantes.SPLASH_IMAGE_1)
-            ivLogo2.loadUrl(Constantes.SPLASH_IMAGE_2)
+            ivLogo.loadUrl(Constantes.SPLASH_IMAGE)
         }
 
         val handler = Handler(Looper.getMainLooper())

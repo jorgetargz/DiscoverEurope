@@ -1,5 +1,6 @@
 package com.jorgetargz.europa.ui.list_ciudades
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -77,6 +78,22 @@ class ListCiudadesFragment : Fragment(), MenuProvider {
                             ListCiudadesEvent.UndoDeleteCiudad(ciudad)
                         )
                     }
+                    .show()
+                viewModel.handleEvent(ListCiudadesEvent.ClearState)
+            }
+            state.onDeleteCiudadConRutas?.let {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(stringProvider.getString(R.string.ciudad_con_rutas))
+                    .setMessage(stringProvider.getString(R.string.ciudad_con_rutas_mensaje))
+                    .setPositiveButton(stringProvider.getString(R.string.ok)) { dialog, _ ->
+                        viewModel.handleEvent(ListCiudadesEvent.DeleteCiudadConRutas(it))
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton(stringProvider.getString(R.string.cancelar)) { dialog, _ ->
+                        adapter.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }
+                    .setCancelable(true)
                     .show()
                 viewModel.handleEvent(ListCiudadesEvent.ClearState)
             }

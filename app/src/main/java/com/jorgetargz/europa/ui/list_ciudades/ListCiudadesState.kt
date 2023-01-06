@@ -6,4 +6,5 @@ data class ListCiudadesState(
     val lista: List<Ciudad>?,
     val listaFiltrada: List<Ciudad>?,
     val ciudadEliminada: Ciudad?,
+    val onDeleteCiudadConRutas: Ciudad?,
 )

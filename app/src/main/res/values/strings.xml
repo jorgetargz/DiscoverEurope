@@ -50,4 +50,8 @@
     <string name="error_add_ruta">Rellena los campos obligatorios</string>
     <string name="ruta_edited">Ruta editada</string>
     <string name="editar_ruta">Editar ruta</string>
+    <string name="ok">Si</string>
+    <string name="ciudad_con_rutas">Ciudad con rutas</string>
+    <string name="ciudad_con_rutas_mensaje">Esta ciudad tiene rutas asignadas estas seguro de que quieres borrarlas</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

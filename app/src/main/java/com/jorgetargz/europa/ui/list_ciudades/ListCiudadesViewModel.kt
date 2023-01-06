@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgetargz.europa.domain.modelo.Ciudad
 import com.jorgetargz.europa.domain.usecases.ciudades.AddCiudadUseCase
+import com.jorgetargz.europa.domain.usecases.ciudades.DeleteCiudadConRutasUseCase
 import com.jorgetargz.europa.domain.usecases.ciudades.DeleteCiudadUseCase
 import com.jorgetargz.europa.domain.usecases.paises.LoadPaisConCiudadesByNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,10 +18,11 @@ import javax.inject.Inject
 class ListCiudadesViewModel @Inject constructor(
     private val loadPaisConCiudadesByNameUseCase: LoadPaisConCiudadesByNameUseCase,
     private val deleteCiudadUseCase: DeleteCiudadUseCase,
+    private val deleteCiudadConRutasUseCase: DeleteCiudadConRutasUseCase,
     private val addCiudadUseCase: AddCiudadUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(ListCiudadesState(null, null, null))
+    private val _state = MutableLiveData(ListCiudadesState(null, null, null, null))
     val state: LiveData<ListCiudadesState> = _state
 
     private fun loadCiudades(pais: String) {
@@ -59,6 +61,11 @@ class ListCiudadesViewModel @Inject constructor(
                     ciudadEliminada = ciudad
                 )
             } catch (e: Exception) {
+                _state.value = _state.value?.copy(
+                    lista = _state.value?.lista,
+                    listaFiltrada = _state.value?.listaFiltrada,
+                    onDeleteCiudadConRutas = ciudad
+                )
                 Timber.e(e)
             }
         }
@@ -78,9 +85,25 @@ class ListCiudadesViewModel @Inject constructor(
         }
     }
 
+    private fun deleteCiudadConRutas(ciudad: Ciudad) {
+        viewModelScope.launch {
+            try {
+                deleteCiudadConRutasUseCase.invoke(ciudad)
+                _state.value = _state.value?.copy(
+                    lista = _state.value?.lista?.filter { it.id != ciudad.id },
+                    listaFiltrada = _state.value?.listaFiltrada?.filter { it.id != ciudad.id },
+                    ciudadEliminada = ciudad
+                )
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }
+    }
+
     private fun clearState() {
         _state.value = _state.value?.copy(
             ciudadEliminada = null,
+            onDeleteCiudadConRutas = null
         )
     }
 
@@ -90,6 +113,7 @@ class ListCiudadesViewModel @Inject constructor(
             is ListCiudadesEvent.FiltrarCiudades -> filtrarCiudades(event.nombre)
             is ListCiudadesEvent.DeleteCiudad -> deleteCiudad(event.ciudad)
             is ListCiudadesEvent.UndoDeleteCiudad -> addCiudad(event.ciudad)
+            is ListCiudadesEvent.DeleteCiudadConRutas -> deleteCiudadConRutas(event.ciudad)
             ListCiudadesEvent.ClearState -> clearState()
         }
     }

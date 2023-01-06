@@ -7,9 +7,11 @@ import com.jorgetargz.europa.data.room.modelo.relacciones.RutaConCiudadesYEmpres
 @Dao
 interface RutasDao {
 
+    @Transaction
     @Query("SELECT * FROM rutas")
     suspend fun getAllWithRelations(): List<RutaConCiudadesYEmpresa>
 
+    @Transaction
     @Query("SELECT * FROM rutas WHERE id = :id")
     suspend fun findById(id: Int): RutaConCiudadesYEmpresa
 

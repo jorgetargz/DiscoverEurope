@@ -56,4 +56,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="empresa_con_rutas">Empresa con rutas</string>
     <string name="empresa_con_rutas_mensaje">Esta empresa tiene rutas definidas seguro que deseas eliminarla</string>
+    <string name="about">Acerca de</string>
+    <string name="mi_github">Mi perfil de GitHub</string>
+    <string name="about_mensaje">Aplicacion desarollada por Jorge Martín Llorente para el modulo Programacion Multimedia y Dispositivos Moviles impartido por el profesor Óscar Novillo Camacho</string>
 </resources>

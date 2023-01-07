@@ -56,4 +56,7 @@
     <string name="cancelar">Cancel</string>
     <string name="empresa_con_rutas">Business with routes</string>
     <string name="empresa_con_rutas_mensaje">This business have routes are you sure you want to delete both the business and its routes</string>
+    <string name="about">About</string>
+    <string name="mi_github">My GitHub Profile</string>
+    <string name="about_mensaje">Application developed by Jorge Martín Llorente for the Multimedia Programming and Mobile Devices module taught by Professor Óscar Novillo Camacho</string>
 </resources>

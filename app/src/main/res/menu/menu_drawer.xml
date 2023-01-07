@@ -5,6 +5,7 @@
     <item
         android:id="@id/listPaisesFragment"
         android:menuCategory="secondary"
+        android:icon="@drawable/ic_location_dot_solid"
         android:title="@string/selecciona_pais"
         android:contentDescription="@string/ver_paises"
         app:showAsAction="never" />
@@ -12,6 +13,7 @@
     <item
         android:id="@id/listEmpresasFragment"
         android:menuCategory="secondary"
+        android:icon="@drawable/ic_building_solid"
         android:title="@string/selecciona_empresa"
         android:contentDescription="@string/ver_empresas"
         app:showAsAction="never" />
@@ -19,6 +21,7 @@
     <item
         android:id="@id/listRutasFragment"
         android:menuCategory="secondary"
+        android:icon="@drawable/ic_route_solid"
         android:title="@string/selecciona_ruta"
         android:contentDescription="@string/ver_rutas"
         app:showAsAction="never" />
@@ -32,6 +35,20 @@
             <menu>
             </menu>
         </item>
+    </group>
+
+    <group android:id="@+id/drawer_group_otros"
+        android:menuCategory="container">
+        <item
+            android:id="@+id/item_about"
+            android:icon="@drawable/ic_circle_info_solid"
+            android:title="@string/about"
+            android:contentDescription="@string/about" />
+        <item
+            android:id="@+id/item_github"
+            android:icon="@drawable/ic_github"
+            android:title="@string/mi_github"
+            android:contentDescription="@string/mi_github" />
     </group>
 
 </menu>

@@ -4,17 +4,18 @@ import androidx.room.*
 import com.jorgetargz.europa.data.room.modelo.EmpresaEntity
 import com.jorgetargz.europa.data.room.modelo.RutaEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.EmpresaConRutas
+import com.jorgetargz.europa.data.room.utils.SQLQueries
 
 @Dao
 interface EmpresasDao {
 
-    @Query("SELECT * FROM businesses")
+    @Query(SQLQueries.SELECT_ALL_EMPRESAS)
     suspend fun getAll(): List<EmpresaEntity>
 
-    @Query("SELECT * FROM businesses WHERE id = :id LIMIT 1")
+    @Query(SQLQueries.SELECT_EMPRESA_BY_ID)
     suspend fun getById(id: Int): EmpresaEntity
 
-    @Query("SELECT * FROM businesses WHERE id = :id LIMIT 1")
+    @Query(SQLQueries.SELECT_EMPRESA_BY_ID)
     suspend fun getEmpresaConRutasById(id: Int): EmpresaConRutas
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

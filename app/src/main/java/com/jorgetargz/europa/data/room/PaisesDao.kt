@@ -3,21 +3,22 @@ package com.jorgetargz.europa.data.room
 import androidx.room.*
 import com.jorgetargz.europa.data.room.modelo.PaisEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.PaisConCiudades
+import com.jorgetargz.europa.data.room.utils.SQLQueries
 
 @Dao
 interface PaisesDao {
 
-    @Query("select * from paises order by nombre")
+    @Query(SQLQueries.SELECT_ALL_PAISES)
     suspend fun getAll(): List<PaisEntity>
 
-    @Query("select * from paises where favorito = 1 order by nombre")
+    @Query(SQLQueries.SELECT_PAISES_FAVORITOS)
     suspend fun getFavoritos(): List<PaisEntity>
 
-    @Query("select * from paises where nombre = :nombre limit 1")
+    @Query(SQLQueries.SELECT_PAIS_BY_NOMBRE)
     suspend fun getByName(nombre: String): PaisEntity
 
     @Transaction
-    @Query("select * from paises where nombre = :nombre limit 1")
+    @Query(SQLQueries.SELECT_PAIS_BY_NOMBRE)
     suspend fun getByNameWithCities(nombre: String): PaisConCiudades
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

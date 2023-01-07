@@ -4,15 +4,16 @@ import androidx.room.*
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.RutaEntity
 import com.jorgetargz.europa.data.room.modelo.relacciones.CiudadConRutas
+import com.jorgetargz.europa.data.room.utils.SQLQueries
 
 @Dao
 interface CiudadesDao {
 
-    @Query("SELECT * FROM ciudades")
+    @Query(SQLQueries.SELECT_ALL_CIUDADES)
     suspend fun getAll(): List<CiudadEntity>
 
     @Transaction
-    @Query("SELECT * FROM ciudades WHERE id = :id")
+    @Query(SQLQueries.SELECT_CIUDAD_BY_ID)
     suspend fun getCiudadConRutas(id : Int): CiudadConRutas
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -7,5 +7,6 @@ object Constantes {
     const val ID_RUTA = "idRuta"
     const val PAIS = "pais"
     const val NAMED_INJECT_STRING_PROVIDER = "string_provider"
+    const val GITHUB_PROFILE_URL = "https://github.com/jorgetargz"
 
 }

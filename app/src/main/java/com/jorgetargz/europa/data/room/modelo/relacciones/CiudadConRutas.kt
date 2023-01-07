@@ -2,6 +2,7 @@ package com.jorgetargz.europa.data.room.modelo.relacciones
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.jorgetargz.europa.data.room.common.Constantes
 import com.jorgetargz.europa.data.room.modelo.CiudadEntity
 import com.jorgetargz.europa.data.room.modelo.RutaEntity
 
@@ -11,14 +12,14 @@ data class CiudadConRutas(
     val ciudad: CiudadEntity,
 
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id_ciudad_inicio",
+        parentColumn = Constantes.COLUM_NAME_ID,
+        entityColumn = Constantes.COLUM_NAME_ID_CIUDAD_INICIO,
     )
     val rutasDeSalida: List<RutaEntity>,
 
     @Relation(
-        parentColumn = "id",
-        entityColumn = "id_ciudad_fin",
+        parentColumn = Constantes.COLUM_NAME_ID,
+        entityColumn = Constantes.COLUM_NAME_ID_CIUDAD_FIN,
     )
     val rutasDeLlegada: List<RutaEntity>,
 )

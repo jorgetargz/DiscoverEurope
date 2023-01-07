@@ -1,5 +1,8 @@
 package com.jorgetargz.europa.ui.main
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -10,7 +13,10 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.jorgetargz.europa.R
 import com.jorgetargz.europa.databinding.ActivityMainBinding
 import com.jorgetargz.europa.domain.modelo.Pais
@@ -60,21 +66,41 @@ class MainActivity : AppCompatActivity() {
 
     private fun configNavView() {
         binding.navView.setupWithNavController(navController)
-        //TODO: This is a workaround don't know why binding.navView.setupWithNavController(navController) doesn't work
-//        binding.navView.setNavigationItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.listPaisesFragment -> {
-//                    navController.navigate(R.id.action_global_listPaisesFragment)
-//                }
-//            }
-//            binding.drawerLayout.closeDrawer(GravityCompat.START)
-//            true
-//        }
+        binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.listPaisesFragment -> {
+                    navController.navigate(R.id.action_global_listPaisesFragment)
+                }
+                R.id.listEmpresasFragment -> {
+                    navController.navigate(R.id.action_global_bussinessListFragment)
+                }
+                R.id.listRutasFragment -> {
+                    navController.navigate(R.id.action_global_listRutasFragment)
+                }
+                R.id.item_about -> {
+                    AlertDialog.Builder(this)
+                        .setTitle(stringProvider.getString(R.string.about))
+                        .setMessage(stringProvider.getString(R.string.about_mensaje))
+                        .setNegativeButton(stringProvider.getString(R.string.cancelar)) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .setCancelable(true)
+                        .show()
+                }
+                R.id.item_github -> {
+                    val myProfileURI = Uri.parse(Constantes.GITHUB_PROFILE_URL)
+                    val intent = Intent(Intent.ACTION_VIEW, myProfileURI)
+                    startActivity(intent)
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
     }
 
     private fun configAppBar() {
         appBarConfiguration = AppBarConfiguration(
-            navController.graph,
+            setOf(R.id.listPaisesFragment, R.id.listEmpresasFragment, R.id.listRutasFragment),
             binding.drawerLayout
         )
         setSupportActionBar(binding.topAppBar)
